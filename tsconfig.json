@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@elements": ["elements/index"],
+            "@fixtures": ["fixtures/index"],
+            "@pages": ["pages/index"],
+            "@types": ["types"]
+        },
+        "strict": true
+    }
+}

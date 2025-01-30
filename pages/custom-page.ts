@@ -1,0 +1,63 @@
+import { type Page, test } from "@playwright/test";
+import { Button, CommonElement, Link } from "@elements";
+
+import { Header } from "./components/header";
+
+export class CustomPage {
+  public readonly header: Header;
+
+  constructor(public readonly page: Page) {
+    this.page = page;
+    this.header = new Header(this.page);
+  }
+
+  public getLatestMasterLogMessage(): CommonElement {
+    return new CommonElement(
+      "latest master log message",
+      this.page.locator("css=#MasterLog logs log:last-child")
+    );
+  }
+
+  /**
+   * Wait for event `download`, click an element to start download, return suggested filename
+   * @param triggerElement element on the page to click on to start download
+   * @returns suggested filename for this download
+   */
+  public async getSuggestedFilenameForDownload(
+    triggerElement: Button | CommonElement | Link
+  ): Promise<string> {
+    const downloadPromise = this.page.waitForEvent("download");
+    await triggerElement.click();
+    const download = await downloadPromise;
+    return download.suggestedFilename();
+  }
+
+  /**
+   * Wait for event `download`, click an element to fire up file chooser, wait for API response
+   * @param triggerElement element on the page to click on to trigger file chooser
+   * @param filePaths an array on file paths to set in the file chooser
+   * @param requestUrl URL of the file upload request
+   */
+  public async setFileChooserFiles(
+    triggerElement: Button | CommonElement | Link,
+    filePaths: string[],
+    requestUrl: string
+  ): Promise<void> {
+    for await (const filePath of filePaths) {
+      await test.step(`Upload file "${filePath}"`, async () => {
+        const fileChooserPromise = this.page.waitForEvent("filechooser");
+
+        await triggerElement.click();
+
+        const fileChooser = await fileChooserPromise;
+        const responsePromise = this.page.waitForResponse(requestUrl);
+
+        await fileChooser.setFiles(filePath);
+
+        await test.step(`Wait for response "${requestUrl}"`, async () => {
+          const response = await responsePromise;
+        });
+      });
+    }
+  }
+}

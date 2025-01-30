@@ -1,0 +1,28 @@
+{
+  "name": "gb-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "clean": "node ./scripts/clean.mjs",
+    "e2e": "npx playwright test",
+    "e2e:headed": "npx playwright test --headed",
+    "report": "allure serve allure-results"
+  },
+  "keywords": [
+    "e2e",
+    "end-to-end",
+    "pw",
+    "playwright"
+  ],
+  "author": "s0nought",
+  "license": "MIT",
+  "description": "End-to-end tests for gamebanana.com",
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "@types/node": "^22.12.0",
+    "allure-playwright": "^3.0.9"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}
