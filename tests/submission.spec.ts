@@ -64,7 +64,7 @@ test.describe("UI", () => {
           await allure.link(submissionUrl, "Submission URL");
           await allure.parameter("Section", sectionSlug);
           await allure.parameter("Submission ID", String(submissionId));
-          await allure.parameter("Submission title", title);
+          await allure.parameter("Submission title", title, { excluded: true });
 
           await test.step("Submission view page", async () => {
             await submissionViewPage.goto(sectionSlug, submissionId);
@@ -118,7 +118,7 @@ test.describe("UI", () => {
 
           await allure.link(gameUrl, "Game URL");
           await allure.parameter("Section", sectionSlug);
-          await allure.parameter("Title", title);
+          await allure.parameter("Title", title, { excluded: true });
           await allure.parameter("Category id", String(categoryId));
           await allure.parameter("Body text", bodyText);
           await allure.parameter("Subtitle", subtitle);
