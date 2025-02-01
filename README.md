@@ -68,9 +68,15 @@ N.B.: you might need to login in the UI first when you run tests from a new devi
 
 ## Scripts
 
+Syntax: `npm run <script name>`
+
 |Name|Description|
 |:---|:----------|
-|`npm run clean`|Clean Allure and Playwright test results|
-|`npm run e2e`|Run end-to-end tests|
-|`npm run e2e:headed`|Run end-to-end tests in headed mode|
-|`npm run report`|Generate Allure report|
+|`clean`|Clean Allure and Playwright test results|
+|`e2e:headless`|Run end-to-end tests in headless mode|
+|`e2e:headed`|Run end-to-end tests in headed mode|
+|`e2e`|**Run end-to-end tests pipeline**|
+|`report:copy-history`|Preserve Allure report "history" subdirectory|
+|`report:generate`|Generate Allure report|
+|`report:open`|Serve Allure report|
+|`report`|**Run Allure report pipeline**|

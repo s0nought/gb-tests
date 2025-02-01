@@ -4,9 +4,13 @@
   "main": "index.js",
   "scripts": {
     "clean": "node ./scripts/clean.mjs",
-    "e2e": "npx playwright test",
+    "e2e:headless": "npx playwright test",
     "e2e:headed": "npx playwright test --headed",
-    "report": "allure serve allure-results"
+    "e2e": "npm run clean && npm run e2e:headless",
+    "report:copy-history": "node ./scripts/copy-history.mjs \"allure-report\" \"allure-results\"",
+    "report:generate": "allure generate --clean allure-results",
+    "report:open": "allure open allure-report",
+    "report": "npm run report:copy-history && npm run report:generate && npm run report:open"
   },
   "keywords": [
     "e2e",
