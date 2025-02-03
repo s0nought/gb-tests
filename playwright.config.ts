@@ -22,11 +22,13 @@ export default defineConfig<IAuthState & IUserCredentials>({
   projects: [
     {
       name: "setup",
+      testDir: "./setup",
       testMatch: /.*\.setup\.ts/,
     },
     {
       name: "chromium",
       grep: /@cjm/,
+      testDir: "./tests",
       use: {
         ...devices["Desktop Chrome"],
         storageState: GB_AUTH_STATE_FILE,
@@ -53,7 +55,6 @@ export default defineConfig<IAuthState & IUserCredentials>({
     ],
   ],
   retries: process.env.CI ? 2 : 0,
-  testDir: "./tests",
   timeout: Number(GB_TEST_TIMEOUT_MS),
   use: {
     gbAuthStateFile: GB_AUTH_STATE_FILE,
