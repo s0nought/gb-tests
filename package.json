@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "clean": "node ./scripts/clean.mjs",
+    "clean": "ts-node ./scripts/clean.ts",
     "e2e:headless": "npx playwright test",
     "e2e:headed": "npx playwright test --headed",
     "e2e": "npm run clean && npm run e2e:headless",
-    "report:copy-history": "node ./scripts/copy-history.mjs \"allure-report\" \"allure-results\"",
+    "report:copy-history": "ts-node ./scripts/copy-history.ts",
     "report:generate": "allure generate --clean allure-results",
     "report:open": "allure open allure-report",
     "report": "npm run report:copy-history && npm run report:generate && npm run report:open"
@@ -24,7 +24,8 @@
   "devDependencies": {
     "@playwright/test": "^1.50.0",
     "@types/node": "^22.12.0",
-    "allure-playwright": "^3.0.9"
+    "allure-playwright": "^3.0.9",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "dotenv": "^16.4.7"

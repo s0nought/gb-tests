@@ -1,19 +1,14 @@
-import path from "node:path";
 import { cpSync, existsSync } from "node:fs";
 
-const allureHistoryDirName = "history";
-const allureReportDirName = process.argv[2] ?? "allure-report";
-const allureReportHistoryDir = path.resolve(
+import {
+  allureReportHistoryDir,
+  allureHistoryDirName,
   allureReportDirName,
-  allureHistoryDirName
-);
-const allureResultsDirName = process.argv[3] ?? "allure-results";
-const allureResultsHistoryDir = path.resolve(
   allureResultsDirName,
-  allureHistoryDirName
-);
+  allureResultsHistoryDir,
+} from "../constants"; // https://github.com/TypeStrong/ts-node/issues/138
 
-console.log("Running copy-history.mjs");
+console.log("Running copy-history.ts");
 
 if (!existsSync(allureReportHistoryDir)) {
   console.log(`> Not found "${allureReportHistoryDir}"`);

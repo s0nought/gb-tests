@@ -2,6 +2,13 @@ import "dotenv/config";
 import { defineConfig, devices } from "@playwright/test";
 import { type IAuthState, type IUserCredentials } from "@fixtures";
 
+import {
+  allureResultsDir,
+  playwrightResultsDir,
+  testsDir,
+  testsSetupDir,
+} from "@constants";
+
 const {
   GB_USER_LOGIN = "UserLogin",
   GB_USER_PASSWORD = "UserPassword",
@@ -18,17 +25,17 @@ export default defineConfig<IAuthState & IUserCredentials>({
   },
   forbidOnly: !!process.env.CI,
   fullyParallel: true,
-  outputDir: "./test-results",
+  outputDir: playwrightResultsDir,
   projects: [
     {
       name: "setup",
-      testDir: "./setup",
+      testDir: testsSetupDir,
       testMatch: /.*\.setup\.ts/,
     },
     {
       name: "chromium",
       grep: /@cjm/,
-      testDir: "./tests",
+      testDir: testsDir,
       use: {
         ...devices["Desktop Chrome"],
         storageState: GB_AUTH_STATE_FILE,
@@ -41,7 +48,7 @@ export default defineConfig<IAuthState & IUserCredentials>({
     [
       "allure-playwright",
       {
-        resultsDir: "./allure-results",
+        resultsDir: allureResultsDir,
         detail: false,
         environmentInfo: {
           base_url: GB_BASE_URL,

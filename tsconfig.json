@@ -2,6 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
+            "@constants": ["constants"],
             "@elements": ["elements/index"],
             "@fixtures": ["fixtures/index"],
             "@pages": ["pages/index"],

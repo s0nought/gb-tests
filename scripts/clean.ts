@@ -1,13 +1,14 @@
-import path from "node:path";
 import { rmSync, mkdirSync } from "node:fs";
 
-const allureResultsDir = path.resolve("allure-results");
-const playwrightResultsDir = path.resolve("test-results");
-const playwrightStateDir = path.resolve("playwright", "state");
+import {
+  allureResultsDir,
+  playwrightResultsDir,
+  playwrightStateDir,
+} from "../constants"; // https://github.com/TypeStrong/ts-node/issues/138
 
 const dirs = [allureResultsDir, playwrightResultsDir, playwrightStateDir];
 
-console.log("Running clean.mjs");
+console.log("Running clean.ts");
 
 dirs.forEach((dir) => {
   try {
