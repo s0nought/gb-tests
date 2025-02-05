@@ -1,4 +1,4 @@
-import { test as base } from "@playwright/test";
+import { expect, test as base } from "@playwright/test";
 import {
   AddPage,
   GamePage,
@@ -9,6 +9,15 @@ import {
   SubmissionEditPage,
   SubmissionViewPage,
 } from "@pages";
+
+interface IUserCredentials {
+  gbUserLogin: string;
+  gbUserPassword: string;
+}
+
+interface IAuthState {
+  gbAuthStateFile: string;
+}
 
 interface IPages {
   addPage: AddPage;
@@ -21,7 +30,11 @@ interface IPages {
   submissionViewPage: SubmissionViewPage;
 }
 
-export const test = base.extend<IPages>({
+const test = base.extend<IUserCredentials & IAuthState & IPages>({
+  gbUserLogin: ["gbUserLogin", { option: true }],
+  gbUserPassword: ["gbUserPassword", { option: true }],
+  gbAuthStateFile: ["gbAuthStateFile", { option: true }],
+
   addPage: async ({ page }, use) => {
     await use(new AddPage(page));
   },
@@ -54,3 +67,5 @@ export const test = base.extend<IPages>({
     await use(new SubmissionViewPage(page));
   },
 });
+
+export { expect, test, type IAuthState, type IUserCredentials };

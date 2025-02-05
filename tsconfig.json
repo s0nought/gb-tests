@@ -4,7 +4,7 @@
         "paths": {
             "@constants": ["constants"],
             "@elements": ["elements/index"],
-            "@fixtures": ["fixtures/index"],
+            "@fixtures": ["fixtures/fixtures"],
             "@pages": ["pages/index"],
             "@types": ["types"]
         },
