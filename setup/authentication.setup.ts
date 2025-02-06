@@ -8,7 +8,6 @@ test.describe("UI", () => {
         "Authentication",
         { tag: ["@cjm"] },
         async ({
-          baseURL,
           homePage,
           loginPage,
           gbUserLogin,
@@ -23,7 +22,6 @@ test.describe("UI", () => {
               "2FA and reCAPTCHA are not supported."
           );
           await allure.severity(allure.Severity.CRITICAL);
-          await allure.link(String(baseURL), "Base URL");
           await allure.parameter("User login", gbUserLogin);
 
           await test.step("Home page", async () => {

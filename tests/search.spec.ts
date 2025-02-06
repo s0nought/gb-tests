@@ -7,7 +7,7 @@ test.describe("UI", () => {
       test(
         "Simple search",
         { tag: ["@cjm"] },
-        async ({ baseURL, homePage, searchPage, submissionViewPage }) => {
+        async ({ homePage, searchPage, submissionViewPage }) => {
           await allure.epic("UI");
           await allure.feature("Core");
           await allure.story("Search");
@@ -15,7 +15,6 @@ test.describe("UI", () => {
             "**This test attempts to perform a simple search from the header.**"
           );
           await allure.severity(allure.Severity.NORMAL);
-          await allure.link(String(baseURL), "Base URL");
 
           const searchQuery = "Outro 'Go get some sleep'";
 
@@ -43,7 +42,7 @@ test.describe("UI", () => {
       test(
         "Advanced search",
         { tag: ["@cjm"] },
-        async ({ baseURL, searchPage, submissionViewPage }) => {
+        async ({ searchPage, submissionViewPage }) => {
           await allure.epic("UI");
           await allure.feature("Core");
           await allure.story("Search");
@@ -51,7 +50,6 @@ test.describe("UI", () => {
             "**This test attempts to perform an advanced search from the search page.**"
           );
           await allure.severity(allure.Severity.NORMAL);
-          await allure.link(String(baseURL), "Base URL");
 
           const searchQuery = "ZBOT NAV Editor Command Menu";
           const section = "Mods";

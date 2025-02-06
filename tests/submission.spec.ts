@@ -15,7 +15,6 @@ test.describe("UI", () => {
             "**This test attempts to download a file attached to the submission.**"
           );
           await allure.severity(allure.Severity.CRITICAL);
-          await allure.link(String(baseURL), "Base URL");
 
           const sectionSlug = "mods";
           const submissionId = 567136;
@@ -54,7 +53,6 @@ test.describe("UI", () => {
             "**This test attempts to edit submission's title.**"
           );
           await allure.severity(allure.Severity.NORMAL);
-          await allure.link(String(baseURL), "Base URL");
 
           const sectionSlug = "mods";
           const submissionId = 567136;
@@ -88,7 +86,6 @@ test.describe("UI", () => {
         "Add",
         { tag: ["@cjm"] },
         async ({
-          page,
           baseURL,
           gamePage,
           addPage,
@@ -103,7 +100,6 @@ test.describe("UI", () => {
             "**This test attempts to add a submission for a specific game.**"
           );
           await allure.severity(allure.Severity.CRITICAL);
-          await allure.link(String(baseURL), "Base URL");
 
           const gameId = 5538; // 7 Days To Die
           const sectionSlug = "mods";

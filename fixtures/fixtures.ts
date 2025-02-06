@@ -9,6 +9,7 @@ import {
   SubmissionEditPage,
   SubmissionViewPage,
 } from "@pages";
+import * as allure from "allure-js-commons";
 
 interface IUserCredentials {
   gbUserLogin: string;
@@ -65,6 +66,11 @@ const test = base.extend<IUserCredentials & IAuthState & IPages>({
 
   submissionViewPage: async ({ page }, use) => {
     await use(new SubmissionViewPage(page));
+  },
+
+  page: async ({ baseURL, page }, use) => {
+    await allure.link(String(baseURL), "Base URL");
+    await use(page);
   },
 });
 
