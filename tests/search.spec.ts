@@ -6,13 +6,16 @@ test.describe("UI", () => {
     test.describe("Search", () => {
       test(
         "Find a mod by its title",
-        { tag: ["@cjm"] },
+        {
+          tag: ["@cjm"],
+          annotation: [
+            {
+              type: "allure",
+              description: "UI;Core;Search;normal",
+            },
+          ],
+        },
         async ({ homePage, searchPage, submissionViewPage }) => {
-          await allure.epic("UI");
-          await allure.feature("Core");
-          await allure.story("Search");
-          await allure.severity(allure.Severity.NORMAL);
-
           const searchQuery = "Outro 'Go get some sleep'";
 
           await allure.parameter("Search query", searchQuery);
@@ -38,13 +41,16 @@ test.describe("UI", () => {
 
       test(
         "Find a mod by its title and properties",
-        { tag: ["@cjm"] },
+        {
+          tag: ["@cjm"],
+          annotation: [
+            {
+              type: "allure",
+              description: "UI;Core;Search;normal",
+            },
+          ],
+        },
         async ({ searchPage, submissionViewPage }) => {
-          await allure.epic("UI");
-          await allure.feature("Core");
-          await allure.story("Search");
-          await allure.severity(allure.Severity.NORMAL);
-
           const searchQuery = "ZBOT NAV Editor Command Menu";
           const section = "Mods";
           const gameTitle = "Counter-Strike 1.6";

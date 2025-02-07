@@ -6,7 +6,15 @@ test.describe("UI", () => {
     test.describe("Authentication", () => {
       test(
         "Log in with username and password",
-        { tag: ["@cjm"] },
+        {
+          tag: ["@cjm"],
+          annotation: [
+            {
+              type: "allure",
+              description: "UI;Core;Authentication;critical",
+            },
+          ],
+        },
         async ({
           homePage,
           loginPage,
@@ -14,10 +22,6 @@ test.describe("UI", () => {
           gbUserPassword,
           gbAuthStateFile,
         }) => {
-          await allure.epic("UI");
-          await allure.feature("Core");
-          await allure.story("Authentication");
-          await allure.severity(allure.Severity.CRITICAL);
           await allure.parameter("User login", gbUserLogin);
 
           await test.step("Home page", async () => {

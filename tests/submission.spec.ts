@@ -6,13 +6,16 @@ test.describe("UI", () => {
     test.describe("Submission", () => {
       test(
         "Download a file attached to the submission",
-        { tag: ["@cjm"] },
+        {
+          tag: ["@cjm"],
+          annotation: [
+            {
+              type: "allure",
+              description: "UI;Core;Submission;critical",
+            },
+          ],
+        },
         async ({ baseURL, submissionViewPage }) => {
-          await allure.epic("UI");
-          await allure.feature("Core");
-          await allure.story("Submission");
-          await allure.severity(allure.Severity.CRITICAL);
-
           const sectionSlug = "mods";
           const submissionId = 567136;
           const submissionUrl = `${baseURL}/${sectionSlug}/${submissionId}`;
@@ -41,13 +44,16 @@ test.describe("UI", () => {
 
       test(
         "Edit submission's title",
-        { tag: ["@cjm"] },
+        {
+          tag: ["@cjm"],
+          annotation: [
+            {
+              type: "allure",
+              description: "UI;Core;Submission;normal",
+            },
+          ],
+        },
         async ({ baseURL, submissionViewPage, submissionEditPage }) => {
-          await allure.epic("UI");
-          await allure.feature("Core");
-          await allure.story("Submission");
-          await allure.severity(allure.Severity.NORMAL);
-
           const sectionSlug = "mods";
           const submissionId = 567136;
           const submissionUrl = `${baseURL}/${sectionSlug}/${submissionId}`;
@@ -78,7 +84,15 @@ test.describe("UI", () => {
 
       test(
         "Add a submission",
-        { tag: ["@cjm"] },
+        {
+          tag: ["@cjm"],
+          annotation: [
+            {
+              type: "allure",
+              description: "UI;Core;Submission;critical",
+            },
+          ],
+        },
         async ({
           baseURL,
           gamePage,
@@ -87,11 +101,6 @@ test.describe("UI", () => {
           submissionViewPage,
           gbUserLogin,
         }) => {
-          await allure.epic("UI");
-          await allure.feature("Core");
-          await allure.story("Submission");
-          await allure.severity(allure.Severity.CRITICAL);
-
           const gameId = 5538; // 7 Days To Die
           const sectionSlug = "mods";
           const gameUrl = `${baseURL}/games/${gameId}`;
