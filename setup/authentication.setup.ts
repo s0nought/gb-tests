@@ -5,7 +5,7 @@ test.describe("UI", () => {
   test.describe("Core", () => {
     test.describe("Authentication", () => {
       test(
-        "Authentication",
+        "Log in with username and password",
         { tag: ["@cjm"] },
         async ({
           homePage,
@@ -17,10 +17,6 @@ test.describe("UI", () => {
           await allure.epic("UI");
           await allure.feature("Core");
           await allure.story("Authentication");
-          await allure.description(
-            "**This test attempts to authenticate with login and password.**\n" +
-              "2FA and reCAPTCHA are not supported."
-          );
           await allure.severity(allure.Severity.CRITICAL);
           await allure.parameter("User login", gbUserLogin);
 

@@ -5,15 +5,12 @@ test.describe("UI", () => {
   test.describe("Core", () => {
     test.describe("Submission", () => {
       test(
-        "Download",
+        "Download a file attached to the submission",
         { tag: ["@cjm"] },
         async ({ baseURL, submissionViewPage }) => {
           await allure.epic("UI");
           await allure.feature("Core");
           await allure.story("Submission");
-          await allure.description(
-            "**This test attempts to download a file attached to the submission.**"
-          );
           await allure.severity(allure.Severity.CRITICAL);
 
           const sectionSlug = "mods";
@@ -43,15 +40,12 @@ test.describe("UI", () => {
       );
 
       test(
-        "Edit",
+        "Edit submission's title",
         { tag: ["@cjm"] },
         async ({ baseURL, submissionViewPage, submissionEditPage }) => {
           await allure.epic("UI");
           await allure.feature("Core");
           await allure.story("Submission");
-          await allure.description(
-            "**This test attempts to edit submission's title.**"
-          );
           await allure.severity(allure.Severity.NORMAL);
 
           const sectionSlug = "mods";
@@ -83,7 +77,7 @@ test.describe("UI", () => {
       );
 
       test(
-        "Add",
+        "Add a submission",
         { tag: ["@cjm"] },
         async ({
           baseURL,
@@ -96,9 +90,6 @@ test.describe("UI", () => {
           await allure.epic("UI");
           await allure.feature("Core");
           await allure.story("Submission");
-          await allure.description(
-            "**This test attempts to add a submission for a specific game.**"
-          );
           await allure.severity(allure.Severity.CRITICAL);
 
           const gameId = 5538; // 7 Days To Die

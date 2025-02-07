@@ -13,20 +13,14 @@ Table of Contents:
 ## Tests
 
 - **Authentication**
-    - _Authentication_  
-        Authenticate with login and password from the login page.
+    - _Log in with username and password_
 - **Search**
-    - _Simple_  
-        Perform a basic search for a submission from the header.
-    - _Advanced_  
-        Perform an advanced search for a submission from the search page.
+    - _Find a mod by its title_
+    - _Find a mod by its title and properties_
 - **Submission**
-    - _Download_  
-        Download a file attached to a submission.
-    - _Edit_  
-        Edit submission's properties.
-    - _Add_  
-        Add a submission for a game.
+    - _Download a file attached to the submission_
+    - _Edit submission's title_
+    - _Add a submission_
 
 ## Stack
 
