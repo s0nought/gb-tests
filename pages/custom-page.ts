@@ -4,7 +4,7 @@ import { Button, CommonElement, Link } from "@elements";
 import { Header } from "./components/header";
 
 export class CustomPage {
-  public readonly header: Header;
+  private readonly header: Header;
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -30,6 +30,10 @@ export class CustomPage {
     await triggerElement.click();
     const download = await downloadPromise;
     return download.suggestedFilename();
+  }
+
+  public interactHeader(): Header {
+    return this.header;
   }
 
   /**

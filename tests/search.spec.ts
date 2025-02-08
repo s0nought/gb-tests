@@ -19,8 +19,8 @@ test.describe("UI", () => {
 
           await test.step("Home page", async () => {
             await homePage.goto();
-            await homePage.header.searchQueryInput.fill(searchQuery);
-            await homePage.header.searchButton.click();
+            await homePage.interactHeader().fillSearchQueryInput(searchQuery);
+            await homePage.interactHeader().clickSearchButton();
           });
 
           await test.step("Search page", async () => {

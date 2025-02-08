@@ -23,7 +23,7 @@ test.describe("UI", () => {
         }) => {
           await test.step("Home page", async () => {
             await homePage.goto();
-            await homePage.header.loginLink.click();
+            await homePage.interactHeader().clickLoginLink();
           });
 
           await test.step("Login page", async () => {
