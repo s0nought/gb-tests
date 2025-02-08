@@ -1,5 +1,4 @@
 import { test } from "@fixtures";
-import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
   test.describe("Core", () => {
@@ -17,8 +16,6 @@ test.describe("UI", () => {
         },
         async ({ homePage, searchPage, submissionViewPage }) => {
           const searchQuery = "Outro 'Go get some sleep'";
-
-          await allure.parameter("Search query", searchQuery);
 
           await test.step("Home page", async () => {
             await homePage.goto();
@@ -56,12 +53,6 @@ test.describe("UI", () => {
           const gameTitle = "Counter-Strike 1.6";
           const searchFieldIgnored = "Studio";
           const resultOrder = "Relevance";
-
-          await allure.parameter("Search query", searchQuery);
-          await allure.parameter("Section", section);
-          await allure.parameter("Game title", gameTitle);
-          await allure.parameter("Search field (ignored)", searchFieldIgnored);
-          await allure.parameter("Result order", resultOrder);
 
           await test.step("Search page", async () => {
             await searchPage.goto();

@@ -1,5 +1,4 @@
 import { test } from "@fixtures";
-import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
   test.describe("Core", () => {
@@ -22,8 +21,6 @@ test.describe("UI", () => {
           gbUserPassword,
           gbAuthStateFile,
         }) => {
-          await allure.parameter("User login", gbUserLogin);
-
           await test.step("Home page", async () => {
             await homePage.goto();
             await homePage.header.loginLink.click();

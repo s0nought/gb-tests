@@ -22,9 +22,6 @@ test.describe("UI", () => {
           const filenameExpected = "yet-another-test-mod.json";
 
           await allure.link(submissionUrl, "Submission URL");
-          await allure.parameter("Section", sectionSlug);
-          await allure.parameter("Submission ID", String(submissionId));
-          await allure.parameter("Filename", filenameExpected);
 
           test.slow(); // download times may vary
 
@@ -60,9 +57,6 @@ test.describe("UI", () => {
           const title = `Test Mod ${Date.now()}`;
 
           await allure.link(submissionUrl, "Submission URL");
-          await allure.parameter("Section", sectionSlug);
-          await allure.parameter("Submission ID", String(submissionId));
-          await allure.parameter("Submission title", title, { excluded: true });
 
           await test.step("Submission view page", async () => {
             await submissionViewPage.goto(sectionSlug, submissionId);
@@ -113,15 +107,6 @@ test.describe("UI", () => {
             "No need to comment on this submission.";
 
           await allure.link(gameUrl, "Game URL");
-          await allure.parameter("Section", sectionSlug);
-          await allure.parameter("Title", title, { excluded: true });
-          await allure.parameter("Category id", String(categoryId));
-          await allure.parameter("Body text", bodyText);
-          await allure.parameter("Subtitle", subtitle);
-          await allure.parameter(
-            "Comment instructions text",
-            commentInstructionsText
-          );
 
           await test.step("Game page", async () => {
             await gamePage.goto(gameId);
