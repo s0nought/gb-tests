@@ -27,11 +27,9 @@ test.describe("UI", () => {
           });
 
           await test.step("Login page", async () => {
-            await loginPage.usernameInput.fill(gbUserLogin);
-            await loginPage.passwordInput.fill(gbUserPassword, {
-              isMasked: true,
-            });
-            await loginPage.submitButton.click();
+            await loginPage.fillUsernameInput(gbUserLogin);
+            await loginPage.fillPasswordInput(gbUserPassword);
+            await loginPage.clickSubmitButton();
           });
 
           await test.step("Home page", async () => {

@@ -4,9 +4,9 @@ import { Button, InputText } from "@elements";
 import { CustomPage } from "./custom-page";
 
 export class LoginPage extends CustomPage {
-  public readonly usernameInput: InputText;
-  public readonly passwordInput: InputText;
-  public readonly submitButton: Button;
+  private readonly usernameInput: InputText;
+  private readonly passwordInput: InputText;
+  private readonly submitButton: Button;
 
   constructor(public readonly page: Page) {
     super(page);
@@ -33,5 +33,17 @@ export class LoginPage extends CustomPage {
     await test.step(`Navigate to "${url}"`, async () => {
       await this.page.goto(url);
     });
+  }
+
+  public async fillUsernameInput(username: string): Promise<void> {
+    await this.usernameInput.fill(username);
+  }
+
+  public async fillPasswordInput(password: string): Promise<void> {
+    await this.passwordInput.fill(password, { isMasked: true });
+  }
+
+  public async clickSubmitButton(): Promise<void> {
+    await this.submitButton.click();
   }
 }
