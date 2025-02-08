@@ -1,4 +1,4 @@
-import { type Page, test } from "@playwright/test";
+import { type Page, expect, test } from "@playwright/test";
 import { Heading, Link } from "@elements";
 import { type SectionSlug } from "@types";
 
@@ -6,9 +6,9 @@ import { SubNavigator } from "./components/subnavigator";
 import { CustomPage } from "./custom-page";
 
 export class SubmissionViewPage extends CustomPage {
-  public readonly fileDownloadLink: Link;
-  public readonly submissionTitle: Heading;
-  public readonly subNavigator: SubNavigator;
+  private readonly fileDownloadLink: Link;
+  private readonly submissionTitle: Heading;
+  private readonly subNavigator: SubNavigator;
 
   constructor(public readonly page: Page) {
     super(page);
@@ -36,6 +36,30 @@ export class SubmissionViewPage extends CustomPage {
 
     await test.step(`Navigate to "${url}"`, async () => {
       await this.page.goto(url);
+    });
+  }
+
+  public async clickFileDownloadLink(): Promise<void> {
+    await this.fileDownloadLink.click();
+  }
+
+  public async assertSubmissionTitle(
+    text: string | RegExp | string[] | RegExp[]
+  ): Promise<void> {
+    await this.submissionTitle.assertTextContent(text);
+  }
+
+  public interactSubNavigator(): SubNavigator {
+    return this.subNavigator;
+  }
+
+  public async assertDownloadFilename(expected: string): Promise<void> {
+    const actual = await super.getSuggestedFilenameForDownload(
+      this.fileDownloadLink
+    );
+
+    await test.step(`Assert downloaded file name is "${expected}"`, () => {
+      expect(actual).toEqual(expected);
     });
   }
 }

@@ -1,4 +1,4 @@
-import { expect, test } from "@fixtures";
+import { test } from "@fixtures";
 
 test.describe("UI", () => {
   test.describe("Core", () => {
@@ -23,14 +23,7 @@ test.describe("UI", () => {
 
           await test.step("Submission view page", async () => {
             await submissionViewPage.goto(sectionSlug, submissionId);
-            const filenameActual =
-              await submissionViewPage.getSuggestedFilenameForDownload(
-                submissionViewPage.fileDownloadLink
-              );
-
-            await test.step(`Assert downloaded file name is "${filenameExpected}"`, () => {
-              expect(filenameActual).toEqual(filenameExpected);
-            });
+            await submissionViewPage.assertDownloadFilename(filenameExpected);
           });
         }
       );
@@ -53,7 +46,10 @@ test.describe("UI", () => {
 
           await test.step("Submission view page", async () => {
             await submissionViewPage.goto(sectionSlug, submissionId);
-            await submissionViewPage.subNavigator.getEntry("Edit").click();
+            await submissionViewPage
+              .interactSubNavigator()
+              .getEntry("Edit")
+              .click();
           });
 
           await test.step("Submission edit page", async () => {
@@ -62,7 +58,7 @@ test.describe("UI", () => {
           });
 
           await test.step("Submission view page", async () => {
-            await submissionViewPage.submissionTitle.assertTextContent(
+            await submissionViewPage.assertSubmissionTitle(
               new RegExp(`.*${title}.*`)
             );
           });
@@ -154,7 +150,7 @@ test.describe("UI", () => {
           });
 
           await test.step("Submission view page", async () => {
-            await submissionViewPage.submissionTitle.assertTextContent(
+            await submissionViewPage.assertSubmissionTitle(
               new RegExp(`.*${title}.*`)
             );
           });

@@ -29,7 +29,7 @@ test.describe("UI", () => {
           });
 
           await test.step("Submission view page", async () => {
-            await submissionViewPage.submissionTitle.assertTextContent(
+            await submissionViewPage.assertSubmissionTitle(
               new RegExp(`.*${searchQuery}.*`)
             );
           });
@@ -69,7 +69,7 @@ test.describe("UI", () => {
           });
 
           await test.step("Submission view page", async () => {
-            await submissionViewPage.submissionTitle.assertTextContent(
+            await submissionViewPage.assertSubmissionTitle(
               new RegExp(`.*${searchQuery}.*`)
             );
           });
