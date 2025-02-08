@@ -1,5 +1,4 @@
 import { expect, test } from "@fixtures";
-import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
   test.describe("Core", () => {
@@ -15,13 +14,10 @@ test.describe("UI", () => {
             },
           ],
         },
-        async ({ baseURL, submissionViewPage }) => {
+        async ({ submissionViewPage }) => {
           const sectionSlug = "mods";
           const submissionId = 567136;
-          const submissionUrl = `${baseURL}/${sectionSlug}/${submissionId}`;
           const filenameExpected = "yet-another-test-mod.json";
-
-          await allure.link(submissionUrl, "Submission URL");
 
           test.slow(); // download times may vary
 
@@ -50,13 +46,10 @@ test.describe("UI", () => {
             },
           ],
         },
-        async ({ baseURL, submissionViewPage, submissionEditPage }) => {
+        async ({ submissionViewPage, submissionEditPage }) => {
           const sectionSlug = "mods";
           const submissionId = 567136;
-          const submissionUrl = `${baseURL}/${sectionSlug}/${submissionId}`;
           const title = `Test Mod ${Date.now()}`;
-
-          await allure.link(submissionUrl, "Submission URL");
 
           await test.step("Submission view page", async () => {
             await submissionViewPage.goto(sectionSlug, submissionId);
@@ -88,7 +81,6 @@ test.describe("UI", () => {
           ],
         },
         async ({
-          baseURL,
           gamePage,
           addPage,
           submissionAddPage,
@@ -97,16 +89,12 @@ test.describe("UI", () => {
         }) => {
           const gameId = 5538; // 7 Days To Die
           const sectionSlug = "mods";
-          const gameUrl = `${baseURL}/games/${gameId}`;
-
           const title = `Test Mod ${Date.now()}`;
           const categoryId = 1; // Other/Misc
           const bodyText = "This is a test mod created by end-to-end tests.";
           const subtitle = "A test mod (end-to-end tests)";
           const commentInstructionsText =
             "No need to comment on this submission.";
-
-          await allure.link(gameUrl, "Game URL");
 
           await test.step("Game page", async () => {
             await gamePage.goto(gameId);
