@@ -85,7 +85,6 @@ const test = base.extend<IUserCredentials & IAuthState & IPages>({
       await allure.severity(s);
     }
 
-    await allure.link(String(baseURL), "Base URL");
     await use(page);
   },
 });
