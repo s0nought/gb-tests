@@ -70,7 +70,7 @@ const test = base.extend<IUserCredentials & IAuthState & IPages>({
     await use(new SubmissionViewPage(page));
   },
 
-  page: async ({ baseURL, page }, use, testInfo) => {
+  page: async ({ page }, use, testInfo) => {
     const allureInfo = getAllureHierarchyAndSeverity(testInfo.annotations);
 
     if (allureInfo) {
