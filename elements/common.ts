@@ -20,9 +20,10 @@ export class CommonElement {
   public async assertTextContent(
     text: string | RegExp | string[] | RegExp[]
   ): Promise<void> {
-    await test.step(`Assert ${
-      this.description
-    } text content is ${JSON.stringify(text)}`, async () => {
+    // RegExp is serialized to "{}" with JSON.stringify()
+    await test.step(`Assert ${this.description} text content is ${String(
+      text
+    )}`, async () => {
       await expect(this.locator).toHaveText(text);
     });
   }
