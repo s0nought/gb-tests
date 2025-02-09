@@ -24,7 +24,7 @@ test.describe("UI", () => {
           });
 
           await test.step("Search page", async () => {
-            await searchPage.searchQueryInput.assertValue(searchQuery);
+            await searchPage.assertSearchQueryInputValue(searchQuery);
             await searchPage.getFirstLinkInResultsList().click();
           });
 
@@ -56,15 +56,15 @@ test.describe("UI", () => {
 
           await test.step("Search page", async () => {
             await searchPage.goto();
-            await searchPage.searchQueryInput.fill(searchQuery);
+            await searchPage.fillSearchQueryInput(searchQuery);
             await searchPage.selectSection(section);
             await searchPage.selectGame(gameTitle);
-            await searchPage.advancedOptionsButton.click();
+            await searchPage.clickAdvancedOptionsButton();
             await searchPage
               .getSearchFieldСheckbox(searchFieldIgnored)
               .uncheck();
             await searchPage.getResultOrderRadioButton(resultOrder).check();
-            await searchPage.submitButton.click();
+            await searchPage.clickSubmitButton();
             await searchPage.getFirstLinkInResultsList().click();
           });
 

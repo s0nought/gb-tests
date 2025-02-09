@@ -17,10 +17,10 @@ import {
 import { CustomPage } from "./custom-page";
 
 export class SearchPage extends CustomPage {
-  public readonly searchQueryInput: InputText;
-  public readonly sectionSelect: Select;
-  public readonly advancedOptionsButton: Button;
-  public readonly submitButton: Button;
+  private readonly searchQueryInput: InputText;
+  private readonly sectionSelect: Select;
+  private readonly advancedOptionsButton: Button;
+  private readonly submitButton: Button;
 
   constructor(public readonly page: Page) {
     super(page);
@@ -40,6 +40,22 @@ export class SearchPage extends CustomPage {
       "submit button",
       this.page.locator("css=[name='SearchForm'] button[type='submit']")
     );
+  }
+
+  public async fillSearchQueryInput(value: string): Promise<void> {
+    await this.searchQueryInput.fill(value);
+  }
+
+  public async assertSearchQueryInputValue(value: string): Promise<void> {
+    await this.searchQueryInput.assertValue(value);
+  }
+
+  public async clickAdvancedOptionsButton(): Promise<void> {
+    await this.advancedOptionsButton.click();
+  }
+
+  public async clickSubmitButton(): Promise<void> {
+    await this.submitButton.click();
   }
 
   /**
