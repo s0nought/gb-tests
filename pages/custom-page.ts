@@ -48,7 +48,7 @@ export class CustomPage {
     requestUrl: string
   ): Promise<void> {
     for await (const filePath of filePaths) {
-      await test.step(`Upload file "${filePath}"`, async () => {
+      await test.step(`Upload file ${JSON.stringify(filePath)}`, async () => {
         const fileChooserPromise = this.page.waitForEvent("filechooser");
 
         await triggerElement.click();

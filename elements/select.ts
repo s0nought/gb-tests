@@ -7,13 +7,17 @@ export class SelectElement extends CommonElement {
   }
 
   public async assertValue(value: string): Promise<void> {
-    await test.step(`Assert ${this.description} has value "${value}"`, async () => {
+    await test.step(`Assert ${this.description} has value ${JSON.stringify(
+      value
+    )}`, async () => {
       await expect(this.locator).toHaveValue(value);
     });
   }
 
   public async selectOption(label: string): Promise<void> {
-    await test.step(`Select option with label "${label}" from ${this.description}`, async () => {
+    await test.step(`Select option with label ${JSON.stringify(label)} from ${
+      this.description
+    }`, async () => {
       await this.locator.selectOption({ label });
     });
   }

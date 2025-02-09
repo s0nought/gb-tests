@@ -7,7 +7,9 @@ export class ContenteditableElement extends CommonElement {
   }
 
   public async assertValue(value: string): Promise<void> {
-    await test.step(`Assert ${this.description} has value "${value}"`, async () => {
+    await test.step(`Assert ${this.description} has value ${JSON.stringify(
+      value
+    )}`, async () => {
       await expect(this.locator).toHaveValue(value);
     });
   }
@@ -22,9 +24,9 @@ export class ContenteditableElement extends CommonElement {
     value: string,
     options?: { isMasked: boolean }
   ): Promise<void> {
-    await test.step(`Fill ${this.description} with value "${
-      options?.isMasked ? "***" : value
-    }"`, async () => {
+    await test.step(`Fill ${this.description} with value ${
+      options?.isMasked ? "***" : JSON.stringify(value)
+    }`, async () => {
       await this.locator.fill(value);
     });
   }

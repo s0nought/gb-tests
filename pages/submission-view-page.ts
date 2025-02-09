@@ -58,7 +58,9 @@ export class SubmissionViewPage extends CustomPage {
       this.fileDownloadLink
     );
 
-    await test.step(`Assert downloaded file name is "${expected}"`, () => {
+    await test.step(`Assert downloaded file name is ${JSON.stringify(
+      expected
+    )}`, () => {
       expect(actual).toEqual(expected);
     });
   }

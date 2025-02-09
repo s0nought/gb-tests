@@ -24,7 +24,9 @@ export class SwitchElement {
   public async selectOption(
     answer: SwitchYesNoOption | SwitchAccessOption
   ): Promise<void> {
-    await test.step(`Select option "${answer}" in ${this.description}`, async () => {
+    await test.step(`Select option ${JSON.stringify(answer)} in ${
+      this.description
+    }`, async () => {
       const option = this.wrapper.locator(
         `li[data-value='${switchOptions[answer]}']`
       );

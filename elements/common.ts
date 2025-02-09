@@ -10,7 +10,9 @@ export class CommonElement {
   }
 
   public async assertAttribute(name: string, value: string): Promise<void> {
-    await test.step(`Assert ${this.description} attribute "${name}" value is "${value}"`, async () => {
+    await test.step(`Assert ${
+      this.description
+    } attribute "${name}" value is ${JSON.stringify(value)}`, async () => {
       await expect(this.locator).toHaveAttribute(name, value);
     });
   }
@@ -18,7 +20,9 @@ export class CommonElement {
   public async assertTextContent(
     text: string | RegExp | string[] | RegExp[]
   ): Promise<void> {
-    await test.step(`Assert ${this.description} text content is "${text}"`, async () => {
+    await test.step(`Assert ${
+      this.description
+    } text content is ${JSON.stringify(text)}`, async () => {
       await expect(this.locator).toHaveText(text);
     });
   }
