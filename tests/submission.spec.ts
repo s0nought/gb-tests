@@ -106,32 +106,48 @@ test.describe("UI", () => {
           });
 
           await test.step("Submission add page", async () => {
-            await submissionAddPage.addForm.titleInput.fill(title);
-            await submissionAddPage.addForm.categorySelect.selectOption(
-              categoryId
-            );
-            await submissionAddPage.addForm.bodyTextEditor.fill(
-              "Wysiwyg",
-              bodyText
-            );
-            await submissionAddPage.addForm.subtitleInput.fill(subtitle);
-            await submissionAddPage.addForm.commentInstructionsTextEditor.fill(
-              "Wysiwyg",
-              commentInstructionsText
-            );
+            await submissionAddPage
+              .interactSubmissionForm()
+              .titleInput.fill(title);
+            await submissionAddPage
+              .interactSubmissionForm()
+              .categorySelect.selectOption(categoryId);
+            await submissionAddPage
+              .interactSubmissionForm()
+              .bodyTextEditor.fill("Wysiwyg", bodyText);
+            await submissionAddPage
+              .interactSubmissionForm()
+              .subtitleInput.fill(subtitle);
+            await submissionAddPage
+              .interactSubmissionForm()
+              .commentInstructionsTextEditor.fill(
+                "Wysiwyg",
+                commentInstructionsText
+              );
 
-            await submissionAddPage.addForm.selectCategoryTab("Ownership");
-            await submissionAddPage.addForm.portSwitch.selectOption("Yes");
-            await submissionAddPage.addForm.creatorSwitch.selectOption("Yes");
-            await submissionAddPage.addForm.fillAuthorGroup("Key Authors", {
-              username: gbUserLogin,
-              role: "Author",
-            });
+            await submissionAddPage
+              .interactSubmissionForm()
+              .selectCategoryTab("Ownership");
+            await submissionAddPage
+              .interactSubmissionForm()
+              .portSwitch.selectOption("Yes");
+            await submissionAddPage
+              .interactSubmissionForm()
+              .creatorSwitch.selectOption("Yes");
+            await submissionAddPage
+              .interactSubmissionForm()
+              .fillAuthorGroup("Key Authors", {
+                username: gbUserLogin,
+                role: "Author",
+              });
 
-            await submissionAddPage.addForm.selectCategoryTab("Media");
+            await submissionAddPage
+              .interactSubmissionForm()
+              .selectCategoryTab("Media");
 
             await submissionAddPage.setFileChooserFiles(
-              submissionAddPage.addForm.screenshotsFileChooserButton,
+              submissionAddPage.interactSubmissionForm()
+                .screenshotsFileChooserButton,
               [
                 "./data/screenshots/figure-a.png",
                 "./data/screenshots/figure-b.png",
@@ -140,17 +156,21 @@ test.describe("UI", () => {
             );
 
             await submissionAddPage.setFileChooserFiles(
-              submissionAddPage.addForm.filesFileChooserButton,
+              submissionAddPage.interactSubmissionForm().filesFileChooserButton,
               ["./data/files/yet-another-test-mod.json"],
               "/responders/jfuare"
             );
 
-            await submissionAddPage.addForm.selectCategoryTab("Settings");
-            await submissionAddPage.addForm.accessSwitch.selectOption(
-              "Private"
-            );
+            await submissionAddPage
+              .interactSubmissionForm()
+              .selectCategoryTab("Settings");
+            await submissionAddPage
+              .interactSubmissionForm()
+              .accessSwitch.selectOption("Private");
 
-            await submissionAddPage.addForm.submitButton.click();
+            await submissionAddPage
+              .interactSubmissionForm()
+              .submitButton.click();
           });
 
           await test.step("Submission view page", async () => {

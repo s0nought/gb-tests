@@ -5,11 +5,11 @@ import { SubmissionForm } from "./components/submission-form";
 import { CustomPage } from "./custom-page";
 
 export class SubmissionAddPage extends CustomPage {
-  public readonly addForm: SubmissionForm;
+  private readonly submissionForm: SubmissionForm;
 
   constructor(public readonly page: Page) {
     super(page);
-    this.addForm = new SubmissionForm(this.page);
+    this.submissionForm = new SubmissionForm(this.page);
   }
 
   /**
@@ -23,5 +23,9 @@ export class SubmissionAddPage extends CustomPage {
     await test.step(`Navigate to "${url}"`, async () => {
       await this.page.goto(url);
     });
+  }
+
+  public interactSubmissionForm(): SubmissionForm {
+    return this.submissionForm;
   }
 }
