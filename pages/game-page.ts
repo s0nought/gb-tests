@@ -4,7 +4,7 @@ import { SubNavigator } from "./components/subnavigator";
 import { CustomPage } from "./custom-page";
 
 export class GamePage extends CustomPage {
-  public readonly subNavigator: SubNavigator;
+  private readonly subNavigator: SubNavigator;
 
   constructor(public readonly page: Page) {
     super(page);
@@ -21,5 +21,9 @@ export class GamePage extends CustomPage {
     await test.step(`Navigate to "${url}"`, async () => {
       await this.page.goto(url);
     });
+  }
+
+  public interactSubNavigator(): SubNavigator {
+    return this.subNavigator;
   }
 }

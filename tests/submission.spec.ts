@@ -98,7 +98,7 @@ test.describe("UI", () => {
 
           await test.step("Game page", async () => {
             await gamePage.goto(gameId);
-            await gamePage.subNavigator.getEntry("Add").click();
+            await gamePage.interactSubNavigator().getEntry("Add").click();
           });
 
           await test.step("Add page", async () => {
