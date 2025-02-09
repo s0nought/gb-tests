@@ -53,8 +53,12 @@ test.describe("UI", () => {
           });
 
           await test.step("Submission edit page", async () => {
-            await submissionEditPage.editForm.titleInput.fill(title);
-            await submissionEditPage.editForm.submitButton.click();
+            await submissionEditPage
+              .interactSubmissionForm()
+              .titleInput.fill(title);
+            await submissionEditPage
+              .interactSubmissionForm()
+              .submitButton.click();
           });
 
           await test.step("Submission view page", async () => {
