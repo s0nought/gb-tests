@@ -18,6 +18,14 @@ export class CustomPage {
     );
   }
 
+  public async assertWelcomeMessage(username: string): Promise<void> {
+    await test.step(`Assert welcome message text is "Welcome, ${username}"`, async () => {
+      await this.getLatestMasterLogMessage().assertTextContent(
+        new RegExp(`^Welcome, ${username}.*`)
+      );
+    });
+  }
+
   /**
    * Wait for event `download`, click an element to start download, return suggested filename
    * @param triggerElement element on the page to click on to start download

@@ -33,10 +33,7 @@ test.describe("UI", () => {
           });
 
           await test.step("Home page", async () => {
-            await homePage
-              .getLatestMasterLogMessage()
-              .assertTextContent(new RegExp(`^Welcome, ${gbUserLogin}.*`));
-
+            await homePage.assertWelcomeMessage(gbUserLogin);
             await homePage.saveStorageState(gbAuthStateFile);
           });
         }
