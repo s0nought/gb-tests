@@ -28,4 +28,20 @@ export class SubmissionAddPage extends CustomPage {
   public interactSubmissionForm(): SubmissionForm {
     return this.submissionForm;
   }
+
+  public async uploadScreenshots(filePaths: string[]): Promise<void> {
+    await super.setFileChooserFiles(
+      this.interactSubmissionForm().getScreenshotsFileChooserButton(),
+      filePaths,
+      "/responders/jfu"
+    );
+  }
+
+  public async uploadFiles(filePaths: string[]): Promise<void> {
+    await super.setFileChooserFiles(
+      this.interactSubmissionForm().getFilesFileChooserButton(),
+      filePaths,
+      "/responders/jfuare"
+    );
+  }
 }

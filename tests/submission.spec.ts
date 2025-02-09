@@ -55,10 +55,10 @@ test.describe("UI", () => {
           await test.step("Submission edit page", async () => {
             await submissionEditPage
               .interactSubmissionForm()
-              .titleInput.fill(title);
+              .fillTitleInput(title);
             await submissionEditPage
               .interactSubmissionForm()
-              .submitButton.click();
+              .clickSubmitButton();
           });
 
           await test.step("Submission view page", async () => {
@@ -95,6 +95,11 @@ test.describe("UI", () => {
           const subtitle = "A test mod (end-to-end tests)";
           const commentInstructionsText =
             "No need to comment on this submission.";
+          const screenshots = [
+            "./data/screenshots/figure-a.png",
+            "./data/screenshots/figure-b.png",
+          ];
+          const files = ["./data/files/yet-another-test-mod.json"];
 
           await test.step("Game page", async () => {
             await gamePage.goto(gameId);
@@ -108,32 +113,31 @@ test.describe("UI", () => {
           await test.step("Submission add page", async () => {
             await submissionAddPage
               .interactSubmissionForm()
-              .titleInput.fill(title);
+              .fillTitleInput(title);
             await submissionAddPage
               .interactSubmissionForm()
-              .categorySelect.selectOption(categoryId);
+              .selectCategory(categoryId);
             await submissionAddPage
               .interactSubmissionForm()
-              .bodyTextEditor.fill("Wysiwyg", bodyText);
+              .interactBodyTextEditor()
+              .fill("Wysiwyg", bodyText);
             await submissionAddPage
               .interactSubmissionForm()
-              .subtitleInput.fill(subtitle);
+              .fillSubtitleInput(subtitle);
             await submissionAddPage
               .interactSubmissionForm()
-              .commentInstructionsTextEditor.fill(
-                "Wysiwyg",
-                commentInstructionsText
-              );
+              .interactCommentInstructionsTextEditor()
+              .fill("Wysiwyg", commentInstructionsText);
 
             await submissionAddPage
               .interactSubmissionForm()
               .selectCategoryTab("Ownership");
             await submissionAddPage
               .interactSubmissionForm()
-              .portSwitch.selectOption("Yes");
+              .selectPortSwitch("Yes");
             await submissionAddPage
               .interactSubmissionForm()
-              .creatorSwitch.selectOption("Yes");
+              .selectCreatorSwitch("Yes");
             await submissionAddPage
               .interactSubmissionForm()
               .fillAuthorGroup("Key Authors", {
@@ -145,32 +149,19 @@ test.describe("UI", () => {
               .interactSubmissionForm()
               .selectCategoryTab("Media");
 
-            await submissionAddPage.setFileChooserFiles(
-              submissionAddPage.interactSubmissionForm()
-                .screenshotsFileChooserButton,
-              [
-                "./data/screenshots/figure-a.png",
-                "./data/screenshots/figure-b.png",
-              ],
-              "/responders/jfu"
-            );
-
-            await submissionAddPage.setFileChooserFiles(
-              submissionAddPage.interactSubmissionForm().filesFileChooserButton,
-              ["./data/files/yet-another-test-mod.json"],
-              "/responders/jfuare"
-            );
+            await submissionAddPage.uploadScreenshots(screenshots);
+            await submissionAddPage.uploadFiles(files);
 
             await submissionAddPage
               .interactSubmissionForm()
               .selectCategoryTab("Settings");
             await submissionAddPage
               .interactSubmissionForm()
-              .accessSwitch.selectOption("Private");
+              .selectAccessSwitch("Private");
 
             await submissionAddPage
               .interactSubmissionForm()
-              .submitButton.click();
+              .clickSubmitButton();
           });
 
           await test.step("Submission view page", async () => {

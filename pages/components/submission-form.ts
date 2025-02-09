@@ -9,6 +9,8 @@ import {
 import {
   type SubmissionFormCategoryTab,
   type SubmissionFormAuthorGroup,
+  type SwitchYesNoOption,
+  type SwitchAccessOption,
 } from "@types";
 
 import { TextEditor } from "./text-editor";
@@ -29,33 +31,33 @@ export class SubmissionForm {
 
   // Main Tab
 
-  public readonly titleInput: InputText;
-  public readonly gameSelect: SelectLikeElement;
-  public readonly categorySelect: SelectLikeElement;
-  public readonly bodyTextEditor: TextEditor;
-  public readonly subtitleInput: InputText;
-  public readonly commentInstructionsTextEditor: TextEditor;
+  private readonly titleInput: InputText;
+  private readonly gameSelect: SelectLikeElement;
+  private readonly categorySelect: SelectLikeElement;
+  private readonly bodyTextEditor: TextEditor;
+  private readonly subtitleInput: InputText;
+  private readonly commentInstructionsTextEditor: TextEditor;
 
   // Ownership Tab
 
-  public readonly portSwitch: SwitchElement;
-  public readonly creatorSwitch: SwitchElement;
-  public readonly studioSelect: Select;
-  public readonly contributingStudiosSelect: Select;
-  public readonly licenseTextEditor: TextEditor;
+  private readonly portSwitch: SwitchElement;
+  private readonly creatorSwitch: SwitchElement;
+  private readonly studioSelect: Select;
+  private readonly contributingStudiosSelect: Select;
+  private readonly licenseTextEditor: TextEditor;
 
   // Media Tab
 
-  public readonly screenshotsFileChooserButton: Button;
-  public readonly filesFileChooserButton: Button;
+  private readonly screenshotsFileChooserButton: Button;
+  private readonly filesFileChooserButton: Button;
 
   // Settings Tab
 
-  public readonly accessSwitch: SwitchElement;
+  private readonly accessSwitch: SwitchElement;
 
   // Common
 
-  public readonly submitButton: Button;
+  private readonly submitButton: Button;
 
   constructor(public readonly page: Page) {
     this.page = page;
@@ -140,23 +142,41 @@ export class SubmissionForm {
     );
   }
 
-  /**
-   * @param label name of the category
-   */
-  public async selectCategoryTab(
-    label: SubmissionFormCategoryTab
-  ): Promise<void> {
-    const button = new Button(
-      `"${label}" category tab button`,
-      this.page
-        .locator("css=.MainForm ul.CategoryTabs")
-        .getByText(label, { exact: true })
-    );
+  // Main Tab
 
-    await button.click();
+  public async fillTitleInput(value: string): Promise<void> {
+    await this.titleInput.fill(value);
+  }
+
+  public async selectGame(gameId: number): Promise<void> {
+    await this.gameSelect.selectOption(gameId);
+  }
+
+  public async selectCategory(categoryId: number): Promise<void> {
+    await this.categorySelect.selectOption(categoryId);
+  }
+
+  public interactBodyTextEditor(): TextEditor {
+    return this.bodyTextEditor;
+  }
+
+  public async fillSubtitleInput(value: string): Promise<void> {
+    await this.subtitleInput.fill(value);
+  }
+
+  public interactCommentInstructionsTextEditor(): TextEditor {
+    return this.commentInstructionsTextEditor;
   }
 
   // Ownership Tab
+
+  public async selectPortSwitch(answer: SwitchYesNoOption): Promise<void> {
+    await this.portSwitch.selectOption(answer);
+  }
+
+  public async selectCreatorSwitch(answer: SwitchYesNoOption): Promise<void> {
+    await this.creatorSwitch.selectOption(answer);
+  }
 
   /**
    * @param groupName name of the author group
@@ -180,5 +200,55 @@ export class SubmissionForm {
 
     await usernameInput.fill(username);
     await roleInput.fill(role);
+  }
+
+  public async selectStudio(label: string): Promise<void> {
+    await this.studioSelect.selectOption(label);
+  }
+
+  public async selectContributingStudio(label: string): Promise<void> {
+    await this.contributingStudiosSelect.selectOption(label);
+  }
+
+  public interactLicenseTextEditor(): TextEditor {
+    return this.licenseTextEditor;
+  }
+
+  // Media Tab
+
+  public getScreenshotsFileChooserButton(): Button {
+    return this.screenshotsFileChooserButton;
+  }
+
+  public getFilesFileChooserButton(): Button {
+    return this.filesFileChooserButton;
+  }
+
+  // Settings Tab
+
+  public async selectAccessSwitch(answer: SwitchAccessOption): Promise<void> {
+    await this.accessSwitch.selectOption(answer);
+  }
+
+  // Common
+
+  /**
+   * @param label name of the category
+   */
+  public async selectCategoryTab(
+    label: SubmissionFormCategoryTab
+  ): Promise<void> {
+    const button = new Button(
+      `"${label}" category tab button`,
+      this.page
+        .locator("css=.MainForm ul.CategoryTabs")
+        .getByText(label, { exact: true })
+    );
+
+    await button.click();
+  }
+
+  public async clickSubmitButton(): Promise<void> {
+    await this.submitButton.click();
   }
 }
