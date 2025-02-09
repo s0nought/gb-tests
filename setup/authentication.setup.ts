@@ -37,9 +37,7 @@ test.describe("UI", () => {
               .getLatestMasterLogMessage()
               .assertTextContent(new RegExp(`^Welcome, ${gbUserLogin}.*`));
 
-            await homePage.page
-              .context()
-              .storageState({ path: gbAuthStateFile });
+            await homePage.saveStorageState(gbAuthStateFile);
           });
         }
       );

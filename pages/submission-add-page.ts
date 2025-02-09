@@ -7,7 +7,7 @@ import { CustomPage } from "./custom-page";
 export class SubmissionAddPage extends CustomPage {
   private readonly submissionForm: SubmissionForm;
 
-  constructor(public readonly page: Page) {
+  constructor(page: Page) {
     super(page);
     this.submissionForm = new SubmissionForm(this.page);
   }

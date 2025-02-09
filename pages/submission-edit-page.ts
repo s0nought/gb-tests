@@ -9,7 +9,7 @@ export class SubmissionEditPage extends CustomPage {
   private readonly subNavigator: SubNavigator;
   private readonly submissionForm: SubmissionForm;
 
-  constructor(public readonly page: Page) {
+  constructor(page: Page) {
     super(page);
     this.subNavigator = new SubNavigator(this.page);
     this.submissionForm = new SubmissionForm(this.page);

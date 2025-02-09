@@ -22,7 +22,7 @@ export class SearchPage extends CustomPage {
   private readonly advancedOptionsButton: Button;
   private readonly submitButton: Button;
 
-  constructor(public readonly page: Page) {
+  constructor(page: Page) {
     super(page);
     this.searchQueryInput = new InputText(
       "search query input",

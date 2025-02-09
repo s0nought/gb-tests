@@ -14,8 +14,8 @@ const switchOptions: ISwitchOptions = {
 
 export class SwitchElement {
   constructor(
-    public readonly description: string,
-    public readonly wrapper: Locator
+    private readonly description: string,
+    private readonly wrapper: Locator
   ) {
     this.description = description;
     this.wrapper = wrapper;

@@ -3,7 +3,7 @@ import { CommonElement } from "@elements";
 import { type SubNavigatorEntry } from "@types";
 
 export class SubNavigator {
-  constructor(public readonly page: Page) {
+  constructor(private readonly page: Page) {
     this.page = page;
   }
 

@@ -6,7 +6,7 @@ import { Header } from "./components/header";
 export class CustomPage {
   private readonly header: Header;
 
-  constructor(public readonly page: Page) {
+  constructor(protected readonly page: Page) {
     this.page = page;
     this.header = new Header(this.page);
   }
@@ -63,5 +63,9 @@ export class CustomPage {
         });
       });
     }
+  }
+
+  public async saveStorageState(path: string): Promise<void> {
+    await this.page.context().storageState({ path });
   }
 }

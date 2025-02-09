@@ -6,7 +6,7 @@ import { CustomPage } from "./custom-page";
 export class GamePage extends CustomPage {
   private readonly subNavigator: SubNavigator;
 
-  constructor(public readonly page: Page) {
+  constructor(page: Page) {
     super(page);
     this.subNavigator = new SubNavigator(this.page);
   }

@@ -10,7 +10,7 @@ export class SubmissionViewPage extends CustomPage {
   private readonly submissionTitle: Heading;
   private readonly subNavigator: SubNavigator;
 
-  constructor(public readonly page: Page) {
+  constructor(page: Page) {
     super(page);
     this.fileDownloadLink = new Link(
       "file download link",

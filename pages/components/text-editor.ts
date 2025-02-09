@@ -4,11 +4,9 @@ import { type TextEditorViewMode } from "@types";
 
 export class TextEditor {
   constructor(
-    public readonly page: Page,
-    public readonly description: string,
-    public readonly container: Locator
+    private readonly description: string,
+    private readonly container: Locator
   ) {
-    this.page = page;
     this.description = description;
     this.container = container;
   }

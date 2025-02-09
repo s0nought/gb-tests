@@ -2,8 +2,8 @@ import { type Locator, expect, test } from "@playwright/test";
 
 export class CommonElement {
   constructor(
-    public readonly description: string,
-    public readonly locator: Locator
+    protected readonly description: string,
+    protected readonly locator: Locator
   ) {
     this.description = description;
     this.locator = locator;

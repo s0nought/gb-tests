@@ -6,7 +6,7 @@ export class Header {
   private readonly searchQueryInput: InputText;
   private readonly searchButton: Button;
 
-  constructor(public readonly page: Page) {
+  constructor(private readonly page: Page) {
     this.page = page;
     this.loginLink = new Link(
       "login link in header",

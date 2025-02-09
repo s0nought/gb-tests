@@ -5,7 +5,7 @@ import { type SectionSlug } from "@types";
 import { CustomPage } from "./custom-page";
 
 export class AddPage extends CustomPage {
-  constructor(public readonly page: Page) {
+  constructor(page: Page) {
     super(page);
   }
 

@@ -8,7 +8,7 @@ export class LoginPage extends CustomPage {
   private readonly passwordInput: InputText;
   private readonly submitButton: Button;
 
-  constructor(public readonly page: Page) {
+  constructor(page: Page) {
     super(page);
     this.usernameInput = new InputText(
       "username input",

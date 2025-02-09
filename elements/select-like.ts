@@ -2,8 +2,8 @@ import { type Locator, test } from "@playwright/test";
 
 export class SelectLikeElement {
   constructor(
-    public readonly description: string,
-    public readonly wrapper: Locator
+    private readonly description: string,
+    private readonly wrapper: Locator
   ) {
     this.description = description;
     this.wrapper = wrapper;

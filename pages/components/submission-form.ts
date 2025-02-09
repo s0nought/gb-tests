@@ -59,7 +59,7 @@ export class SubmissionForm {
 
   private readonly submitButton: Button;
 
-  constructor(public readonly page: Page) {
+  constructor(private readonly page: Page) {
     this.page = page;
     this.form = this.page.locator("css=form.MainForm");
 
@@ -78,7 +78,6 @@ export class SubmissionForm {
       this.form.locator("css=#Category .Category")
     );
     this.bodyTextEditor = new TextEditor(
-      this.page,
       "body text editor",
       this.form.locator("css=#Article")
     );
@@ -87,7 +86,6 @@ export class SubmissionForm {
       this.form.locator("css=#Description input")
     );
     this.commentInstructionsTextEditor = new TextEditor(
-      this.page,
       "comment instructions text editor",
       this.form.locator("css=#CommentInstructions")
     );
@@ -111,7 +109,6 @@ export class SubmissionForm {
       this.form.locator("css=#ContributingStudios select")
     );
     this.licenseTextEditor = new TextEditor(
-      this.page,
       "license text editor",
       this.form.locator("css=#License")
     );
