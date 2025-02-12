@@ -1,4 +1,4 @@
-import { type Page, test } from "@playwright/test";
+import { type Page } from "@playwright/test";
 import { Link } from "@elements";
 import { type SectionSlug } from "@types";
 
@@ -7,18 +7,6 @@ import { CustomPage } from "./custom-page";
 export class AddPage extends CustomPage {
   constructor(page: Page) {
     super(page);
-  }
-
-  /**
-   * Navigate to URL
-   * @param gameId ID of the game
-   */
-  public async goto(gameId: number): Promise<void> {
-    const url = `/add?gameid=${gameId}`;
-
-    await test.step(`Navigate to "${url}"`, async () => {
-      await this.page.goto(url);
-    });
   }
 
   /**

@@ -1,4 +1,4 @@
-import { type Page, test } from "@playwright/test";
+import { type Page } from "@playwright/test";
 import {
   Button,
   CommonElement,
@@ -68,15 +68,8 @@ export class SearchPage extends CustomPage {
     );
   }
 
-  /**
-   * Navigate to URL
-   */
   public async goto(): Promise<void> {
-    const url = "/search";
-
-    await test.step(`Navigate to "${url}"`, async () => {
-      await this.page.goto(url);
-    });
+    await super.goto("/search");
   }
 
   /**

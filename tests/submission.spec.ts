@@ -15,14 +15,13 @@ test.describe("UI", () => {
           ],
         },
         async ({ submissionViewPage }) => {
-          const sectionSlug = "mods";
-          const submissionId = 567136;
+          const url = "/mods/567136";
           const filenameExpected = "yet-another-test-mod.json";
 
           test.slow(); // download times may vary
 
           await test.step("Submission view page", async () => {
-            await submissionViewPage.goto(sectionSlug, submissionId);
+            await submissionViewPage.goto(url);
             await submissionViewPage.assertDownloadFilename(filenameExpected);
           });
         }
@@ -40,12 +39,11 @@ test.describe("UI", () => {
           ],
         },
         async ({ submissionViewPage, submissionEditPage }) => {
-          const sectionSlug = "mods";
-          const submissionId = 567136;
+          const url = "/mods/567136";
           const title = `Test Mod ${Date.now()}`;
 
           await test.step("Submission view page", async () => {
-            await submissionViewPage.goto(sectionSlug, submissionId);
+            await submissionViewPage.goto(url);
             await submissionViewPage
               .interactSubNavigator()
               .getEntry("Edit")
@@ -87,7 +85,7 @@ test.describe("UI", () => {
           submissionViewPage,
           gbUserLogin,
         }) => {
-          const gameId = 5538; // 7 Days To Die
+          const url = "/games/5538"; // 7 Days To Die
           const sectionSlug = "mods";
           const title = `Test Mod ${Date.now()}`;
           const categoryId = 1; // Other/Misc
@@ -102,7 +100,7 @@ test.describe("UI", () => {
           const files = ["./data/files/yet-another-test-mod.json"];
 
           await test.step("Game page", async () => {
-            await gamePage.goto(gameId);
+            await gamePage.goto(url);
             await gamePage.interactSubNavigator().getEntry("Add").click();
           });
 

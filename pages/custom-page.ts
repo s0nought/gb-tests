@@ -11,6 +11,12 @@ export class CustomPage {
     this.header = new Header(this.page);
   }
 
+  public async goto(url: string): Promise<void> {
+    await test.step(`Navigate to ${JSON.stringify(url)}`, async () => {
+      await this.page.goto(url);
+    });
+  }
+
   public getLatestMasterLogMessage(): CommonElement {
     return new CommonElement(
       "latest master log message",

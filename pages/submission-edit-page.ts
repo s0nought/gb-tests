@@ -1,5 +1,4 @@
-import { type Page, test } from "@playwright/test";
-import { type SectionSlug } from "@types";
+import { type Page } from "@playwright/test";
 
 import { SubmissionForm } from "./components/submission-form";
 import { SubNavigator } from "./components/subnavigator";
@@ -13,22 +12,6 @@ export class SubmissionEditPage extends CustomPage {
     super(page);
     this.subNavigator = new SubNavigator(this.page);
     this.submissionForm = new SubmissionForm(this.page);
-  }
-
-  /**
-   * Navigate to URL
-   * @param sectionSlug name of the section in plural
-   * @param submissionId ID of the submission
-   */
-  public async goto(
-    sectionSlug: SectionSlug,
-    submissionId: number
-  ): Promise<void> {
-    const url = `/${sectionSlug}/edit/${submissionId}`;
-
-    await test.step(`Navigate to "${url}"`, async () => {
-      await this.page.goto(url);
-    });
   }
 
   public interactSubNavigator(): SubNavigator {

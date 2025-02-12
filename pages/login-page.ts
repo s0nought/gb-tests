@@ -1,4 +1,4 @@
-import { type Page, test } from "@playwright/test";
+import { type Page } from "@playwright/test";
 import { Button, InputText } from "@elements";
 
 import { CustomPage } from "./custom-page";
@@ -24,15 +24,8 @@ export class LoginPage extends CustomPage {
     );
   }
 
-  /**
-   * Navigate to URL
-   */
   public async goto(): Promise<void> {
-    const url = "/members/account/login";
-
-    await test.step(`Navigate to "${url}"`, async () => {
-      await this.page.goto(url);
-    });
+    await super.goto("/members/account/login");
   }
 
   public async fillUsernameInput(username: string): Promise<void> {
