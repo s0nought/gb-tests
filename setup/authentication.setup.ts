@@ -21,21 +21,15 @@ test.describe("UI", () => {
           gbUserPassword,
           gbAuthStateFile,
         }) => {
-          await test.step("Home page", async () => {
-            await homePage.goto();
-            await homePage.interactHeader().clickLoginLink();
-          });
+          await homePage.goto();
+          await homePage.interactHeader().clickLoginLink();
 
-          await test.step("Login page", async () => {
-            await loginPage.fillUsernameInput(gbUserLogin);
-            await loginPage.fillPasswordInput(gbUserPassword);
-            await loginPage.clickSubmitButton();
-          });
+          await loginPage.fillUsernameInput(gbUserLogin);
+          await loginPage.fillPasswordInput(gbUserPassword);
+          await loginPage.clickSubmitButton();
 
-          await test.step("Home page", async () => {
-            await homePage.assertWelcomeMessage(gbUserLogin);
-            await homePage.saveStorageState(gbAuthStateFile);
-          });
+          await homePage.assertWelcomeMessage(gbUserLogin);
+          await homePage.saveStorageState(gbAuthStateFile);
         }
       );
     });

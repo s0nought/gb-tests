@@ -20,10 +20,8 @@ test.describe("UI", () => {
 
           test.slow(); // download times may vary
 
-          await test.step("Submission view page", async () => {
-            await submissionViewPage.goto(url);
-            await submissionViewPage.assertDownloadFilename(filenameExpected);
-          });
+          await submissionViewPage.goto(url);
+          await submissionViewPage.assertDownloadFilename(filenameExpected);
         }
       );
 
@@ -42,28 +40,20 @@ test.describe("UI", () => {
           const url = "/mods/567136";
           const title = `Test Mod ${Date.now()}`;
 
-          await test.step("Submission view page", async () => {
-            await submissionViewPage.goto(url);
-            await submissionViewPage
-              .interactSubNavigator()
-              .getEntry("Edit")
-              .click();
-          });
+          await submissionViewPage.goto(url);
+          await submissionViewPage
+            .interactSubNavigator()
+            .getEntry("Edit")
+            .click();
 
-          await test.step("Submission edit page", async () => {
-            await submissionEditPage
-              .interactSubmissionForm()
-              .fillTitleInput(title);
-            await submissionEditPage
-              .interactSubmissionForm()
-              .clickSubmitButton();
-          });
+          await submissionEditPage
+            .interactSubmissionForm()
+            .fillTitleInput(title);
+          await submissionEditPage.interactSubmissionForm().clickSubmitButton();
 
-          await test.step("Submission view page", async () => {
-            await submissionViewPage.assertSubmissionTitle(
-              new RegExp(`.*${title}.*`)
-            );
-          });
+          await submissionViewPage.assertSubmissionTitle(
+            new RegExp(`.*${title}.*`)
+          );
         }
       );
 
@@ -99,74 +89,64 @@ test.describe("UI", () => {
           ];
           const files = ["./data/files/yet-another-test-mod.json"];
 
-          await test.step("Game page", async () => {
-            await gamePage.goto(url);
-            await gamePage.interactSubNavigator().getEntry("Add").click();
-          });
+          await gamePage.goto(url);
+          await gamePage.interactSubNavigator().getEntry("Add").click();
 
-          await test.step("Add page", async () => {
-            await addPage.selectSection(sectionSlug);
-          });
+          await addPage.selectSection(sectionSlug);
 
-          await test.step("Submission add page", async () => {
-            await submissionAddPage
-              .interactSubmissionForm()
-              .fillTitleInput(title);
-            await submissionAddPage
-              .interactSubmissionForm()
-              .selectCategory(categoryId);
-            await submissionAddPage
-              .interactSubmissionForm()
-              .interactBodyTextEditor()
-              .fill("Wysiwyg", bodyText);
-            await submissionAddPage
-              .interactSubmissionForm()
-              .fillSubtitleInput(subtitle);
-            await submissionAddPage
-              .interactSubmissionForm()
-              .interactCommentInstructionsTextEditor()
-              .fill("Wysiwyg", commentInstructionsText);
+          await submissionAddPage
+            .interactSubmissionForm()
+            .fillTitleInput(title);
+          await submissionAddPage
+            .interactSubmissionForm()
+            .selectCategory(categoryId);
+          await submissionAddPage
+            .interactSubmissionForm()
+            .interactBodyTextEditor()
+            .fill("Wysiwyg", bodyText);
+          await submissionAddPage
+            .interactSubmissionForm()
+            .fillSubtitleInput(subtitle);
+          await submissionAddPage
+            .interactSubmissionForm()
+            .interactCommentInstructionsTextEditor()
+            .fill("Wysiwyg", commentInstructionsText);
 
-            await submissionAddPage
-              .interactSubmissionForm()
-              .selectCategoryTab("Ownership");
-            await submissionAddPage
-              .interactSubmissionForm()
-              .selectPortSwitch("Yes");
-            await submissionAddPage
-              .interactSubmissionForm()
-              .selectCreatorSwitch("Yes");
-            await submissionAddPage
-              .interactSubmissionForm()
-              .fillAuthorGroup("Key Authors", {
-                username: gbUserLogin,
-                role: "Author",
-              });
+          await submissionAddPage
+            .interactSubmissionForm()
+            .selectCategoryTab("Ownership");
+          await submissionAddPage
+            .interactSubmissionForm()
+            .selectPortSwitch("Yes");
+          await submissionAddPage
+            .interactSubmissionForm()
+            .selectCreatorSwitch("Yes");
+          await submissionAddPage
+            .interactSubmissionForm()
+            .fillAuthorGroup("Key Authors", {
+              username: gbUserLogin,
+              role: "Author",
+            });
 
-            await submissionAddPage
-              .interactSubmissionForm()
-              .selectCategoryTab("Media");
+          await submissionAddPage
+            .interactSubmissionForm()
+            .selectCategoryTab("Media");
 
-            await submissionAddPage.uploadScreenshots(screenshots);
-            await submissionAddPage.uploadFiles(files);
+          await submissionAddPage.uploadScreenshots(screenshots);
+          await submissionAddPage.uploadFiles(files);
 
-            await submissionAddPage
-              .interactSubmissionForm()
-              .selectCategoryTab("Settings");
-            await submissionAddPage
-              .interactSubmissionForm()
-              .selectAccessSwitch("Private");
+          await submissionAddPage
+            .interactSubmissionForm()
+            .selectCategoryTab("Settings");
+          await submissionAddPage
+            .interactSubmissionForm()
+            .selectAccessSwitch("Private");
 
-            await submissionAddPage
-              .interactSubmissionForm()
-              .clickSubmitButton();
-          });
+          await submissionAddPage.interactSubmissionForm().clickSubmitButton();
 
-          await test.step("Submission view page", async () => {
-            await submissionViewPage.assertSubmissionTitle(
-              new RegExp(`.*${title}.*`)
-            );
-          });
+          await submissionViewPage.assertSubmissionTitle(
+            new RegExp(`.*${title}.*`)
+          );
         }
       );
     });

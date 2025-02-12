@@ -17,22 +17,16 @@ test.describe("UI", () => {
         async ({ homePage, searchPage, submissionViewPage }) => {
           const searchQuery = "Outro 'Go get some sleep'";
 
-          await test.step("Home page", async () => {
-            await homePage.goto();
-            await homePage.interactHeader().fillSearchQueryInput(searchQuery);
-            await homePage.interactHeader().clickSearchButton();
-          });
+          await homePage.goto();
+          await homePage.interactHeader().fillSearchQueryInput(searchQuery);
+          await homePage.interactHeader().clickSearchButton();
 
-          await test.step("Search page", async () => {
-            await searchPage.assertSearchQueryInputValue(searchQuery);
-            await searchPage.getFirstLinkInResultsList().click();
-          });
+          await searchPage.assertSearchQueryInputValue(searchQuery);
+          await searchPage.getFirstLinkInResultsList().click();
 
-          await test.step("Submission view page", async () => {
-            await submissionViewPage.assertSubmissionTitle(
-              new RegExp(`.*${searchQuery}.*`)
-            );
-          });
+          await submissionViewPage.assertSubmissionTitle(
+            new RegExp(`.*${searchQuery}.*`)
+          );
         }
       );
 
@@ -54,25 +48,19 @@ test.describe("UI", () => {
           const searchFieldIgnored = "Studio";
           const resultOrder = "Relevance";
 
-          await test.step("Search page", async () => {
-            await searchPage.goto();
-            await searchPage.fillSearchQueryInput(searchQuery);
-            await searchPage.selectSection(section);
-            await searchPage.selectGame(gameTitle);
-            await searchPage.clickAdvancedOptionsButton();
-            await searchPage
-              .getSearchFieldСheckbox(searchFieldIgnored)
-              .uncheck();
-            await searchPage.getResultOrderRadioButton(resultOrder).check();
-            await searchPage.clickSubmitButton();
-            await searchPage.getFirstLinkInResultsList().click();
-          });
+          await searchPage.goto();
+          await searchPage.fillSearchQueryInput(searchQuery);
+          await searchPage.selectSection(section);
+          await searchPage.selectGame(gameTitle);
+          await searchPage.clickAdvancedOptionsButton();
+          await searchPage.getSearchFieldСheckbox(searchFieldIgnored).uncheck();
+          await searchPage.getResultOrderRadioButton(resultOrder).check();
+          await searchPage.clickSubmitButton();
+          await searchPage.getFirstLinkInResultsList().click();
 
-          await test.step("Submission view page", async () => {
-            await submissionViewPage.assertSubmissionTitle(
-              new RegExp(`.*${searchQuery}.*`)
-            );
-          });
+          await submissionViewPage.assertSubmissionTitle(
+            new RegExp(`.*${searchQuery}.*`)
+          );
         }
       );
     });
