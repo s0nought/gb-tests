@@ -26,10 +26,13 @@ export class TextEditor {
   }
 
   /**
-   * @param viewMode name of the view mode
    * @param text text to be filled in the contenteditable element
+   * @param viewMode name of the view mode
    */
-  public async fill(viewMode: TextEditorViewMode, text: string): Promise<void> {
+  public async fill(
+    text: string,
+    viewMode: TextEditorViewMode = "Wysiwyg"
+  ): Promise<void> {
     await this.selectViewMode(viewMode);
 
     const editor = new ContenteditableElement(

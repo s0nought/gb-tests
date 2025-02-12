@@ -103,14 +103,14 @@ test.describe("UI", () => {
           await submissionAddPage
             .interactSubmissionForm()
             .interactBodyTextEditor()
-            .fill("Wysiwyg", bodyText);
+            .fill(bodyText);
           await submissionAddPage
             .interactSubmissionForm()
             .fillSubtitleInput(subtitle);
           await submissionAddPage
             .interactSubmissionForm()
             .interactCommentInstructionsTextEditor()
-            .fill("Wysiwyg", commentInstructionsText);
+            .fill(commentInstructionsText);
 
           await submissionAddPage
             .interactSubmissionForm()
