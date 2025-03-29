@@ -10,4 +10,8 @@ export class HomePage extends CustomPage {
   public async goto(): Promise<void> {
     await super.goto("/");
   }
+
+  public async waitForURL(): Promise<void> {
+    await super.waitForURL("/");
+  }
 }
