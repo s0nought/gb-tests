@@ -1,0 +1,249 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: UI >> Core >> Search >> Find a mod by its title and properties
+- Location: /home/runner/work/gb-tests/gb-tests/tests/search.spec.ts:36:11
+
+# Error details
+
+```
+Error: page.goto: Test timeout of 30000ms exceeded.
+Call log:
+  - navigating to "https://gamebanana.com/search", waiting until "load"
+
+    at /home/runner/work/gb-tests/gb-tests/pages/custom-page.ts:16:23
+    at SearchPage.goto (/home/runner/work/gb-tests/gb-tests/pages/custom-page.ts:15:16)
+    at SearchPage.goto (/home/runner/work/gb-tests/gb-tests/pages/search-page.ts:72:17)
+    at /home/runner/work/gb-tests/gb-tests/tests/search.spec.ts:50:28
+```
+
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "Logo":
+    - img "Logo"
+  - link "Wuthering Waves icon":
+    - img "Wuthering Waves icon"
+  - link "Resident Evil 4 (2023) icon":
+    - img "Resident Evil 4 (2023) icon"
+  - link "Sonic 3 A.I.R. icon":
+    - img "Sonic 3 A.I.R. icon"
+  - link "7 Days To Die icon":
+    - img "7 Days To Die icon"
+  - link "Friday Night Funkin' icon":
+    - img "Friday Night Funkin' icon"
+  - textbox "Search..."
+  - button "Site Search"
+  - link "Log In"
+  - link "Sign Up"
+  - link "v2.0449"
+  - button "Site Menu"
+- heading "Search" [level=1]
+- navigation:
+  - link "Search"
+- text: Search Term
+- superscript: "*"
+- textbox "Search Term *"
+- text: Section
+- combobox "Section":
+  - option "Any" [selected]
+  - option "Apps"
+  - option "Articles"
+  - option "Bugs"
+  - option "Blogs"
+  - option "Clubs"
+  - option "Contests"
+  - option "Concepts"
+  - option "Events"
+  - option "Games"
+  - option "Ideas"
+  - option "Initiatives"
+  - option "Jams"
+  - option "Mods"
+  - option "Models"
+  - option "Members"
+  - option "News"
+  - option "Polls"
+  - option "Projects"
+  - option "Questions"
+  - option "Reviews"
+  - option "Requests"
+  - option "Scripts"
+  - option "Sounds"
+  - option "Sprays"
+  - option "Studios"
+  - option "Threads"
+  - option "Tools"
+  - option "Tutorials"
+  - option "Wikis"
+  - option "WiPs"
+- text: Game
+- combobox:
+  - textbox
+- button "Advanced Options"
+- button "Search"
+- strong: Site
+- list:
+  - listitem:
+    - link "About"
+  - listitem:
+    - link "FAQ"
+  - listitem:
+    - link "Contact"
+- strong: Network
+- list:
+  - listitem:
+    - link "gbAPI"
+  - listitem:
+    - link "gbAPI - Old"
+  - listitem:
+    - link "BananaExchange"
+  - listitem:
+    - link "genr8rs"
+  - listitem:
+    - link "banana.org"
+- strong: Members
+- list:
+  - listitem:
+    - link "Login"
+  - listitem:
+    - link "Register"
+  - listitem:
+    - link "Online (1,996)"
+  - listitem:
+    - link "Index (3,395,056)"
+- strong: Legal
+- list:
+  - listitem:
+    - link "Site Rules"
+  - listitem:
+    - link "Terms of Service"
+  - listitem:
+    - link "Privacy Policy"
+  - listitem:
+    - link "DMCA Policy"
+  - listitem:
+    - link "Sexual Harassment"
+  - listitem:
+    - link "Age Restrictions"
+  - listitem:
+    - text: "For California Residents:"
+    - link "Do Not Sell My Personal Information"
+- list:
+  - listitem:
+    - link "Gamebanana Discord"
+  - listitem:
+    - link "Gamebanana Steam"
+  - listitem:
+    - link "Gamebanana Bluesky"
+  - listitem:
+    - link "Gamebanana Twitter"
+  - listitem:
+    - link "Gamebanana Youtube"
+  - listitem:
+    - link "Gamebanana Facebook"
+- list:
+  - listitem:
+    - link "Feedback"
+  - listitem:
+    - link "Bugs"
+- img
+```
+
+# Test source
+
+```ts
+   1 | import { type Page, test } from "@playwright/test";
+   2 | import { Button, CommonElement, Link } from "@elements";
+   3 |
+   4 | import { Header } from "./components/header";
+   5 |
+   6 | export class CustomPage {
+   7 |   private readonly header: Header;
+   8 |
+   9 |   constructor(protected readonly page: Page) {
+  10 |     this.page = page;
+  11 |     this.header = new Header(this.page);
+  12 |   }
+  13 |
+  14 |   public async goto(url: string): Promise<void> {
+  15 |     await test.step(`Navigate to ${JSON.stringify(url)}`, async () => {
+> 16 |       await this.page.goto(url);
+     |                       ^ Error: page.goto: Test timeout of 30000ms exceeded.
+  17 |     });
+  18 |   }
+  19 |
+  20 |   public getLatestMasterLogMessage(): CommonElement {
+  21 |     return new CommonElement(
+  22 |       "latest master log message",
+  23 |       this.page.locator("css=#MasterLog logs log:last-child")
+  24 |     );
+  25 |   }
+  26 |
+  27 |   public async assertWelcomeMessage(username: string): Promise<void> {
+  28 |     await test.step(`Assert welcome message text is "Welcome, ${username}"`, async () => {
+  29 |       await this.getLatestMasterLogMessage().assertTextContent(
+  30 |         new RegExp(`^Welcome, ${username}.*`)
+  31 |       );
+  32 |     });
+  33 |   }
+  34 |
+  35 |   /**
+  36 |    * Wait for event `download`, click an element to start download, return suggested filename
+  37 |    * @param triggerElement element on the page to click on to start download
+  38 |    * @returns suggested filename for this download
+  39 |    */
+  40 |   public async getSuggestedFilenameForDownload(
+  41 |     triggerElement: Button | CommonElement | Link
+  42 |   ): Promise<string> {
+  43 |     const downloadPromise = this.page.waitForEvent("download");
+  44 |     await triggerElement.click();
+  45 |     const download = await downloadPromise;
+  46 |     return download.suggestedFilename();
+  47 |   }
+  48 |
+  49 |   public interactHeader(): Header {
+  50 |     return this.header;
+  51 |   }
+  52 |
+  53 |   /**
+  54 |    * Wait for event `download`, click an element to fire up file chooser, wait for API response
+  55 |    * @param triggerElement element on the page to click on to trigger file chooser
+  56 |    * @param filePaths an array on file paths to set in the file chooser
+  57 |    * @param requestUrl URL of the file upload request
+  58 |    */
+  59 |   public async setFileChooserFiles(
+  60 |     triggerElement: Button | CommonElement | Link,
+  61 |     filePaths: string[],
+  62 |     requestUrl: string
+  63 |   ): Promise<void> {
+  64 |     for await (const filePath of filePaths) {
+  65 |       await test.step(`Upload file ${JSON.stringify(filePath)}`, async () => {
+  66 |         const fileChooserPromise = this.page.waitForEvent("filechooser");
+  67 |
+  68 |         await triggerElement.click();
+  69 |
+  70 |         const fileChooser = await fileChooserPromise;
+  71 |         const responsePromise = this.page.waitForResponse(requestUrl);
+  72 |
+  73 |         await fileChooser.setFiles(filePath);
+  74 |
+  75 |         await test.step(`Wait for response "${requestUrl}"`, async () => {
+  76 |           const response = await responsePromise;
+  77 |         });
+  78 |       });
+  79 |     }
+  80 |   }
+  81 |
+  82 |   public async saveStorageState(path: string): Promise<void> {
+  83 |     await this.page.context().storageState({ path });
+  84 |   }
+  85 | }
+  86 |
+```
