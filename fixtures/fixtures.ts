@@ -9,9 +9,6 @@ import {
   SubmissionEditPage,
   SubmissionViewPage,
 } from "@pages";
-import * as allure from "allure-js-commons";
-
-import { getAllureHierarchyAndSeverity } from "./util";
 
 interface IUserCredentials {
   gbUserLogin: string;
@@ -68,24 +65,6 @@ const test = base.extend<IUserCredentials & IAuthState & IPages>({
 
   submissionViewPage: async ({ page }, use) => {
     await use(new SubmissionViewPage(page));
-  },
-
-  page: async ({ page }, use, testInfo) => {
-    const allureInfo = getAllureHierarchyAndSeverity(testInfo.annotations);
-
-    if (allureInfo) {
-      const [h1, h2, h3, s] = allureInfo;
-
-      await allure.epic(h1);
-      await allure.parentSuite(h1);
-      await allure.feature(h2);
-      await allure.suite(h2);
-      await allure.story(h3);
-      await allure.subSuite(h3);
-      await allure.severity(s);
-    }
-
-    await use(page);
   },
 });
 
