@@ -1,18 +1,19 @@
 import { test } from "@fixtures";
+import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
   test.describe("Core", () => {
     test.describe("Authentication", () => {
+      test.beforeEach(async () => {
+        await allure.epic("UI");
+        await allure.feature("Core");
+        await allure.story("Authentication");
+      });
+
       test(
         "Log in with username and password",
         {
           tag: ["@cjm"],
-          annotation: [
-            {
-              type: "allure",
-              description: "UI;Core;Authentication;critical",
-            },
-          ],
         },
         async ({
           homePage,
@@ -21,6 +22,8 @@ test.describe("UI", () => {
           gbUserPassword,
           gbAuthStateFile,
         }) => {
+          await allure.severity(allure.Severity.CRITICAL);
+
           await homePage.goto();
           await homePage.interactHeader().clickLoginLink();
 

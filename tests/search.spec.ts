@@ -1,20 +1,23 @@
 import { test } from "@fixtures";
+import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
   test.describe("Core", () => {
     test.describe("Search", () => {
+      test.beforeEach(async () => {
+        await allure.epic("UI");
+        await allure.feature("Core");
+        await allure.story("Search");
+      });
+
       test(
         "Find a mod by its title",
         {
           tag: ["@cjm"],
-          annotation: [
-            {
-              type: "allure",
-              description: "UI;Core;Search;normal",
-            },
-          ],
         },
         async ({ homePage, searchPage, submissionViewPage }) => {
+          await allure.severity(allure.Severity.NORMAL);
+
           const searchQuery = "Outro 'Go get some sleep'";
 
           await homePage.goto();
@@ -34,14 +37,10 @@ test.describe("UI", () => {
         "Find a mod by its title and properties",
         {
           tag: ["@cjm"],
-          annotation: [
-            {
-              type: "allure",
-              description: "UI;Core;Search;normal",
-            },
-          ],
         },
         async ({ searchPage, submissionViewPage }) => {
+          await allure.severity(allure.Severity.NORMAL);
+
           const searchQuery = "ZBOT NAV Editor Command Menu";
           const section = "Mods";
           const gameTitle = "Counter-Strike 1.6";

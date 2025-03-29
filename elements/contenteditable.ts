@@ -25,7 +25,7 @@ export class ContenteditableElement extends CommonElement {
     options?: { isMasked: boolean }
   ): Promise<void> {
     await test.step(`Fill ${this.description} with value ${
-      options?.isMasked ? "***" : JSON.stringify(value)
+      options?.isMasked ? '"***"' : JSON.stringify(value)
     }`, async () => {
       await this.locator.fill(value);
     });

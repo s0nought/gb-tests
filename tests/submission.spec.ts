@@ -1,20 +1,23 @@
 import { test } from "@fixtures";
+import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
   test.describe("Core", () => {
     test.describe("Submission", () => {
+      test.beforeEach(async () => {
+        await allure.epic("UI");
+        await allure.feature("Core");
+        await allure.story("Submission");
+      });
+
       test(
         "Download a file attached to the submission",
         {
           tag: ["@cjm"],
-          annotation: [
-            {
-              type: "allure",
-              description: "UI;Core;Submission;critical",
-            },
-          ],
         },
         async ({ submissionViewPage }) => {
+          await allure.severity(allure.Severity.CRITICAL);
+
           const url = "/mods/567136";
           const filenameExpected = "yet-another-test-mod.json";
 
@@ -29,14 +32,10 @@ test.describe("UI", () => {
         "Edit submission's title",
         {
           tag: ["@cjm"],
-          annotation: [
-            {
-              type: "allure",
-              description: "UI;Core;Submission;normal",
-            },
-          ],
         },
         async ({ submissionViewPage, submissionEditPage }) => {
+          await allure.severity(allure.Severity.NORMAL);
+
           const url = "/mods/567136";
           const title = `Test Mod ${Date.now()}`;
 
@@ -61,12 +60,6 @@ test.describe("UI", () => {
         "Add a submission",
         {
           tag: ["@cjm"],
-          annotation: [
-            {
-              type: "allure",
-              description: "UI;Core;Submission;critical",
-            },
-          ],
         },
         async ({
           gamePage,
@@ -75,6 +68,8 @@ test.describe("UI", () => {
           submissionViewPage,
           gbUserLogin,
         }) => {
+          await allure.severity(allure.Severity.CRITICAL);
+
           const url = "/games/5538"; // 7 Days To Die
           const sectionSlug = "mods";
           const title = `Test Mod ${Date.now()}`;
