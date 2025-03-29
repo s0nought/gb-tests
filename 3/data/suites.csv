@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","4831","Log in with username and password","setup","Sat Mar 29 23:47:41 GMT 2025","passed","Sat Mar 29 23:47:46 GMT 2025","UI > Core > Authentication","setup/authentication.setup.ts","",""
+"","29887","Add a submission","chromium","Sat Mar 29 23:51:34 GMT 2025","failed","Sat Mar 29 23:52:03 GMT 2025","UI > Core > Submission","tests/submission.spec.ts","",""
+"","25856","Edit submission's title","chromium","Sat Mar 29 23:50:13 GMT 2025","failed","Sat Mar 29 23:50:39 GMT 2025","UI > Core > Submission","tests/submission.spec.ts","",""
+"","25374","Download a file attached to the submission","chromium","Sat Mar 29 23:48:54 GMT 2025","failed","Sat Mar 29 23:49:19 GMT 2025","UI > Core > Submission","tests/submission.spec.ts","",""
+"","4726","Find a mod by its title","chromium","Sat Mar 29 23:47:47 GMT 2025","passed","Sat Mar 29 23:47:52 GMT 2025","UI > Core > Search","tests/search.spec.ts","",""
+"","8316","Find a mod by its title and properties","chromium","Sat Mar 29 23:47:52 GMT 2025","passed","Sat Mar 29 23:48:00 GMT 2025","UI > Core > Search","tests/search.spec.ts","",""
