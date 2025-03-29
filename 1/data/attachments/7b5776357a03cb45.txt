@@ -1,0 +1,167 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: UI >> Core >> Submission >> Add a submission
+- Location: /home/runner/work/gb-tests/gb-tests/tests/submission.spec.ts:59:11
+
+# Error details
+
+```
+TimeoutError: locator.fill: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('form.MainForm').locator('#Name input')
+
+    at /home/runner/work/gb-tests/gb-tests/elements/contenteditable.ts:30:26
+    at ContenteditableElement.fill (/home/runner/work/gb-tests/gb-tests/elements/contenteditable.ts:27:16)
+    at SubmissionForm.fillTitleInput (/home/runner/work/gb-tests/gb-tests/pages/components/submission-form.ts:145:27)
+    at /home/runner/work/gb-tests/gb-tests/tests/submission.spec.ts:94:14
+```
+
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "Logo":
+    - img "Logo"
+  - link "Friday Night Funkin' icon":
+    - img "Friday Night Funkin' icon"
+  - link "Sonic The Hedgehog 2 Absolute icon":
+    - img "Sonic The Hedgehog 2 Absolute icon"
+  - link "Wuthering Waves icon":
+    - img "Wuthering Waves icon"
+  - link "Super Mario Bros icon":
+    - img "Super Mario Bros icon"
+  - link "Team Fortress 2 icon":
+    - img "Team Fortress 2 icon"
+  - textbox "Search..."
+  - button "Site Search"
+  - link "Log In"
+  - link "Sign Up"
+  - link "v2.0449"
+  - button "Site Menu"
+- heading "Add Mod" [level=1]
+- navigation:
+  - link "Mods"
+  - link "Add Mod"
+- paragraph:
+  - text: Please follow the
+  - link "Site Rules"
+  - text: . The Banana thanks you.
+- list:
+  - listitem:
+    - text: You must be a member -
+    - link "Sign up"
+    - text: or
+    - link "Login"
+- strong: Site
+- list:
+  - listitem:
+    - link "About"
+  - listitem:
+    - link "FAQ"
+  - listitem:
+    - link "Contact"
+- strong: Network
+- list:
+  - listitem:
+    - link "gbAPI"
+  - listitem:
+    - link "gbAPI - Old"
+  - listitem:
+    - link "BananaExchange"
+  - listitem:
+    - link "genr8rs"
+  - listitem:
+    - link "banana.org"
+- strong: Members
+- list:
+  - listitem:
+    - link "Login"
+  - listitem:
+    - link "Register"
+  - listitem:
+    - link "Online (2,059)"
+  - listitem:
+    - link "Index (3,394,987)"
+- strong: Legal
+- list:
+  - listitem:
+    - link "Site Rules"
+  - listitem:
+    - link "Terms of Service"
+  - listitem:
+    - link "Privacy Policy"
+  - listitem:
+    - link "DMCA Policy"
+  - listitem:
+    - link "Sexual Harassment"
+  - listitem:
+    - link "Age Restrictions"
+  - listitem:
+    - text: "For California Residents:"
+    - link "Do Not Sell My Personal Information"
+- list:
+  - listitem:
+    - link "Gamebanana Discord"
+  - listitem:
+    - link "Gamebanana Steam"
+  - listitem:
+    - link "Gamebanana Bluesky"
+  - listitem:
+    - link "Gamebanana Twitter"
+  - listitem:
+    - link "Gamebanana Youtube"
+  - listitem:
+    - link "Gamebanana Facebook"
+- list:
+  - listitem:
+    - link "Feedback"
+  - listitem:
+    - link "Bugs"
+- img
+```
+
+# Test source
+
+```ts
+   1 | import { type Locator, expect, test } from "@playwright/test";
+   2 | import { CommonElement } from "./common";
+   3 |
+   4 | export class ContenteditableElement extends CommonElement {
+   5 |   constructor(description: string, locator: Locator) {
+   6 |     super(description, locator);
+   7 |   }
+   8 |
+   9 |   public async assertValue(value: string): Promise<void> {
+  10 |     await test.step(`Assert ${this.description} has value ${JSON.stringify(
+  11 |       value
+  12 |     )}`, async () => {
+  13 |       await expect(this.locator).toHaveValue(value);
+  14 |     });
+  15 |   }
+  16 |
+  17 |   public async clear(): Promise<void> {
+  18 |     await test.step(`Clear ${this.description}`, async () => {
+  19 |       await this.locator.clear();
+  20 |     });
+  21 |   }
+  22 |
+  23 |   public async fill(
+  24 |     value: string,
+  25 |     options?: { isMasked: boolean }
+  26 |   ): Promise<void> {
+  27 |     await test.step(`Fill ${this.description} with value ${
+  28 |       options?.isMasked ? '"***"' : JSON.stringify(value)
+  29 |     }`, async () => {
+> 30 |       await this.locator.fill(value);
+     |                          ^ TimeoutError: locator.fill: Timeout 10000ms exceeded.
+  31 |     });
+  32 |   }
+  33 | }
+  34 |
+```

@@ -1,0 +1,1 @@
+[{"values":["https://gamebanana.com"],"name":"base_url"},{"values":["linux"],"name":"os_platform"},{"values":["v22.14.0"],"name":"node_version"},{"values":["10000"],"name":"action_timeout_ms"},{"values":["10000"],"name":"expect_timeout_ms"},{"values":["30000"],"name":"test_timeout_ms"}]
