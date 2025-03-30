@@ -31,10 +31,27 @@ test.describe("UI", () => {
       test(
         "Edit submission's title",
         {
-          tag: ["@cjm"],
+          tag: ["@cjm", "@debug"],
         },
         async ({ submissionViewPage, submissionEditPage }) => {
-          test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
+          // test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
+
+          const cookies = await page.context().cookies("https://gamebanana.com");
+
+          console.log('"Edit submission\'s title" cookies:');
+
+          cookies.filter((o) => {
+            const name = o["name"];
+            const value = Array.from(o["value"]);
+
+            if (name === "sess") {
+              console.log(`sess value: ${value.at(0)}...${value.at(-1)} (length: ${value.length})`)
+            }
+
+            if (name === "rmc") {
+              console.log(`rmc value: ${value.at(0)}...${value.at(-1)} (length: ${value.length})`)
+            }
+          });
 
           await allure.severity(allure.Severity.NORMAL);
 
