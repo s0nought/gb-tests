@@ -53,7 +53,7 @@ test.describe("UI", () => {
       test(
         "Find a mod by its title and properties",
         {
-          tag: ["@cjm"],
+          tag: ["@cjm", "@debug"],
         },
         async ({ searchPage, submissionViewPage }) => {
           await allure.severity(allure.Severity.NORMAL);
