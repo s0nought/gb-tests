@@ -7,7 +7,7 @@
     "e2e:headless": "npx playwright test",
     "e2e:headed": "npx playwright test --headed",
     "e2e": "npm run clean && npm run e2e:headless",
-    "debug": "npx playwright test -g \"@debug\"",
+    "debug": "npm run clean && npx playwright test -g \"@debug\"",
     "report:copy-history": "ts-node ./scripts/copy-history.ts",
     "report:generate": "allure generate --clean allure-results",
     "report:open": "allure open allure-report",
