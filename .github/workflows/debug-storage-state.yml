@@ -1,0 +1,19 @@
+name: debug-storage-state
+
+on: [pull_request]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: ls --version
+
+      - run: grep --version
+
+      - run: stat --version
