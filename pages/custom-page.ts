@@ -84,6 +84,6 @@ export class CustomPage {
   }
 
   public async saveStorageState(path: string): Promise<void> {
-    await this.page.context().storageState({ path });
+    await this.page.context().storageState({ indexedDB: false, path });
   }
 }
