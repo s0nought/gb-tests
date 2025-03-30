@@ -1,0 +1,127 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: UI >> Core >> Search >> Find a mod by its title and properties
+- Location: /home/runner/work/gb-tests/gb-tests/tests/search.spec.ts:36:11
+
+# Error details
+
+```
+Error: page.goto: Test timeout of 40000ms exceeded.
+Call log:
+  - navigating to "https://gamebanana.com/search", waiting until "load"
+
+    at /home/runner/work/gb-tests/gb-tests/pages/custom-page.ts:16:23
+    at SearchPage.goto (/home/runner/work/gb-tests/gb-tests/pages/custom-page.ts:15:16)
+    at SearchPage.goto (/home/runner/work/gb-tests/gb-tests/pages/search-page.ts:72:17)
+    at /home/runner/work/gb-tests/gb-tests/tests/search.spec.ts:50:28
+```
+
+# Page snapshot
+
+```yaml
+- dialog:
+  - button "close dialog"
+  - text: Advertisement
+```
+
+# Test source
+
+```ts
+   1 | import { type Page, test } from "@playwright/test";
+   2 | import { Button, CommonElement, Link } from "@elements";
+   3 |
+   4 | import { Header } from "./components/header";
+   5 |
+   6 | export class CustomPage {
+   7 |   private readonly header: Header;
+   8 |
+   9 |   constructor(protected readonly page: Page) {
+  10 |     this.page = page;
+  11 |     this.header = new Header(this.page);
+  12 |   }
+  13 |
+  14 |   public async goto(url: string): Promise<void> {
+  15 |     await test.step(`Navigate to ${JSON.stringify(url)}`, async () => {
+> 16 |       await this.page.goto(url);
+     |                       ^ Error: page.goto: Test timeout of 40000ms exceeded.
+  17 |     });
+  18 |   }
+  19 |
+  20 |   public async waitForURL(url: string): Promise<void> {
+  21 |     await this.page.waitForURL(url);
+  22 |   }
+  23 |
+  24 |   public getLatestMasterLogMessage(): CommonElement {
+  25 |     return new CommonElement(
+  26 |       "latest master log message",
+  27 |       this.page.locator("css=#MasterLog logs log:last-child")
+  28 |     );
+  29 |   }
+  30 |
+  31 |   public async assertWelcomeMessage(username: string): Promise<void> {
+  32 |     await test.step(`Assert welcome message text is "Welcome, ${username}"`, async () => {
+  33 |       await this.getLatestMasterLogMessage().assertTextContent(
+  34 |         new RegExp(`^Welcome, ${username}.*`)
+  35 |       );
+  36 |     });
+  37 |   }
+  38 |
+  39 |   /**
+  40 |    * Wait for event `download`, click an element to start download, return suggested filename
+  41 |    * @param triggerElement element on the page to click on to start download
+  42 |    * @returns suggested filename for this download
+  43 |    */
+  44 |   public async getSuggestedFilenameForDownload(
+  45 |     triggerElement: Button | CommonElement | Link
+  46 |   ): Promise<string> {
+  47 |     const downloadPromise = this.page.waitForEvent("download");
+  48 |     await triggerElement.click();
+  49 |     const download = await downloadPromise;
+  50 |     return download.suggestedFilename();
+  51 |   }
+  52 |
+  53 |   public interactHeader(): Header {
+  54 |     return this.header;
+  55 |   }
+  56 |
+  57 |   /**
+  58 |    * Wait for event `download`, click an element to fire up file chooser, wait for API response
+  59 |    * @param triggerElement element on the page to click on to trigger file chooser
+  60 |    * @param filePaths an array on file paths to set in the file chooser
+  61 |    * @param requestUrl URL of the file upload request
+  62 |    */
+  63 |   public async setFileChooserFiles(
+  64 |     triggerElement: Button | CommonElement | Link,
+  65 |     filePaths: string[],
+  66 |     requestUrl: string
+  67 |   ): Promise<void> {
+  68 |     for await (const filePath of filePaths) {
+  69 |       await test.step(`Upload file ${JSON.stringify(filePath)}`, async () => {
+  70 |         const fileChooserPromise = this.page.waitForEvent("filechooser");
+  71 |
+  72 |         await triggerElement.click();
+  73 |
+  74 |         const fileChooser = await fileChooserPromise;
+  75 |         const responsePromise = this.page.waitForResponse(requestUrl);
+  76 |
+  77 |         await fileChooser.setFiles(filePath);
+  78 |
+  79 |         await test.step(`Wait for response "${requestUrl}"`, async () => {
+  80 |           const response = await responsePromise;
+  81 |         });
+  82 |       });
+  83 |     }
+  84 |   }
+  85 |
+  86 |   public async saveStorageState(path: string): Promise<void> {
+  87 |     await this.page.context().storageState({ path });
+  88 |   }
+  89 | }
+  90 |
+```
