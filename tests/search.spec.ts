@@ -13,9 +13,26 @@ test.describe("UI", () => {
       test(
         "Find a mod by its title",
         {
-          tag: ["@cjm"],
+          tag: ["@cjm", "@debug"],
         },
-        async ({ homePage, searchPage, submissionViewPage }) => {
+        async ({ page, homePage, searchPage, submissionViewPage }) => {
+          const cookies = await page.context().cookies("https://gamebanana.com");
+
+          console.log("Cookies in this test:");
+
+          cookies.filter((o) => {
+            const name = o["name"];
+            const value = Array.from(o["value"]);
+
+            if (name === "sess") {
+              console.log(`sess value: ${value.at(0)}...${value.at(-1)} (length: ${value.length})`)
+            }
+
+            if (name === "rmc") {
+              console.log(`rmc value: ${value.at(0)}...${value.at(-1)} (length: ${value.length})`)
+            }
+          });
+
           await allure.severity(allure.Severity.NORMAL);
 
           const searchQuery = "Outro 'Go get some sleep'";
