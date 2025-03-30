@@ -1,4 +1,4 @@
-import { test } from "@fixtures";
+import { test, expect } from "@fixtures";
 import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
@@ -16,6 +16,7 @@ test.describe("UI", () => {
           tag: ["@cjm"],
         },
         async ({
+          page,
           homePage,
           loginPage,
           gbUserLogin,
@@ -33,6 +34,7 @@ test.describe("UI", () => {
 
           await homePage.assertWelcomeMessage(gbUserLogin);
           await homePage.waitForURL();
+          await expect(page.locator("css=#PersonalNavModule")).toBeVisible();
           await homePage.saveStorageState(gbAuthStateFile);
         }
       );
