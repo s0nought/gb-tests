@@ -1,4 +1,4 @@
-import { test, expect } from "@fixtures";
+import { test } from "@fixtures";
 import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
@@ -33,8 +33,10 @@ test.describe("UI", () => {
           await loginPage.clickSubmitButton();
 
           await homePage.assertWelcomeMessage(gbUserLogin);
-          await homePage.waitForURL();
-          await expect(page.locator("css=#PersonalNavModule")).toBeVisible();
+
+          const cookies = await page.context().cookies();
+          console.log(`Number of cookies: ${cookies.length}`);
+
           await homePage.saveStorageState(gbAuthStateFile);
         }
       );

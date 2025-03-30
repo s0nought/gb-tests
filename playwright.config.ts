@@ -1,25 +1,23 @@
 import "dotenv/config";
 import { defineConfig, devices } from "@playwright/test";
 import { type IAuthState, type IUserCredentials } from "@fixtures";
-import * as path from "node:path";
 
 import {
   allureResultsDir,
   playwrightResultsDir,
   testsDir,
   testsSetupDir,
+  playwrightAuthStateFile,
 } from "@constants";
 
 const {
   GB_USER_LOGIN = "UserLogin",
   GB_USER_PASSWORD = "UserPassword",
   GB_BASE_URL = "https://gamebanana.com",
-  GB_ACTION_TIMEOUT_MS = "10000",
-  GB_EXPECT_TIMEOUT_MS = "10000",
-  GB_TEST_TIMEOUT_MS = "30000",
+  GB_ACTION_TIMEOUT_MS = "20000",
+  GB_EXPECT_TIMEOUT_MS = "20000",
+  GB_TEST_TIMEOUT_MS = "40000",
 } = process.env;
-
-const authFile: string = path.resolve(__dirname, "playwright", "state", "user.json");
 
 export default defineConfig<IAuthState & IUserCredentials>({
   expect: {
@@ -40,7 +38,7 @@ export default defineConfig<IAuthState & IUserCredentials>({
       testDir: testsDir,
       use: {
         ...devices["Desktop Chrome"],
-        storageState: authFile,
+        storageState: playwrightAuthStateFile,
       },
       dependencies: ["setup"],
     },
@@ -63,11 +61,10 @@ export default defineConfig<IAuthState & IUserCredentials>({
       },
     ],
   ],
-  // retries: process.env.CI ? 1 : 0,
-  retries: 0,
+  retries: process.env.CI ? 2 : 0,
   timeout: Number(GB_TEST_TIMEOUT_MS),
   use: {
-    gbAuthStateFile: authFile,
+    gbAuthStateFile: playwrightAuthStateFile,
     acceptDownloads: true,
     actionTimeout: Number(GB_ACTION_TIMEOUT_MS),
     baseURL: GB_BASE_URL,

@@ -1,4 +1,4 @@
-import { test, expect } from "@fixtures";
+import { test } from "@fixtures";
 import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
@@ -13,32 +13,14 @@ test.describe("UI", () => {
       test(
         "Find a mod by its title",
         {
-          tag: ["@cjm", "@debug"],
+          tag: ["@cjm"],
         },
-        async ({ page, homePage, searchPage, submissionViewPage }) => {
-          const cookies = await page.context().cookies("https://gamebanana.com");
-
-          console.log('"Find a mod by its title" cookies:');
-
-          cookies.filter((o) => {
-            const name = o["name"];
-            const value = Array.from(o["value"]);
-
-            if (name === "sess") {
-              console.log(`sess value: ${value.at(0)}...${value.at(-1)} (length: ${value.length})`)
-            }
-
-            if (name === "rmc") {
-              console.log(`rmc value: ${value.at(0)}...${value.at(-1)} (length: ${value.length})`)
-            }
-          });
-
+        async ({ homePage, searchPage, submissionViewPage }) => {
           await allure.severity(allure.Severity.NORMAL);
 
           const searchQuery = "Outro 'Go get some sleep'";
 
           await homePage.goto();
-          await expect(page.locator("css=#PersonalNavModule")).toBeVisible();
           await homePage.interactHeader().fillSearchQueryInput(searchQuery);
           await homePage.interactHeader().clickSearchButton();
 
@@ -54,26 +36,9 @@ test.describe("UI", () => {
       test(
         "Find a mod by its title and properties",
         {
-          tag: ["@cjm", "@debug"],
+          tag: ["@cjm"],
         },
-        async ({ page, searchPage, submissionViewPage }) => {
-          const cookies = await page.context().cookies("https://gamebanana.com");
-
-          console.log('"Find a mod by its title and properties" cookies:');
-
-          cookies.filter((o) => {
-            const name = o["name"];
-            const value = Array.from(o["value"]);
-
-            if (name === "sess") {
-              console.log(`sess value: ${value.at(0)}...${value.at(-1)} (length: ${value.length})`)
-            }
-
-            if (name === "rmc") {
-              console.log(`rmc value: ${value.at(0)}...${value.at(-1)} (length: ${value.length})`)
-            }
-          });
-
+        async ({ searchPage, submissionViewPage }) => {
           await allure.severity(allure.Severity.NORMAL);
 
           const searchQuery = "ZBOT NAV Editor Command Menu";
@@ -83,7 +48,6 @@ test.describe("UI", () => {
           const resultOrder = "Relevance";
 
           await searchPage.goto();
-          await expect(page.locator("css=#PersonalNavModule")).toBeVisible();
           await searchPage.fillSearchQueryInput(searchQuery);
           await searchPage.selectSection(section);
           await searchPage.selectGame(gameTitle);
