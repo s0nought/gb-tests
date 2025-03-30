@@ -1,5 +1,6 @@
-import { type Page, test } from "@playwright/test";
+import { type Page, type Cookie, test } from "@playwright/test";
 import { Button, CommonElement, Link } from "@elements";
+import { writeFileSync } from "node:fs";
 
 import { Header } from "./components/header";
 
@@ -79,7 +80,12 @@ export class CustomPage {
     }
   }
 
-  public async saveStorageState(path: string): Promise<void> {
-    await this.page.context().storageState({ indexedDB: false, path });
+  // public async saveStorageState(path: string): Promise<void> {
+  //   await this.page.context().storageState({ indexedDB: false, path });
+  // }
+
+  public writeAuthStateFile(path: string, cookies: Cookie[]): void {
+    const data = {cookies: cookies, origins: []}
+    writeFileSync(path, JSON.stringify(data));
   }
 }

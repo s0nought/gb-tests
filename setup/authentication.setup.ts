@@ -34,10 +34,13 @@ test.describe("UI", () => {
 
           await homePage.assertWelcomeMessage(gbUserLogin);
 
-          const cookies = await page.context().cookies();
-          console.log(`Number of cookies: ${cookies.length}`);
+          const cookiesRaw = await page.context().cookies();
+          console.log(`Number of raw cookies: ${cookiesRaw.length}`);
 
-          await homePage.saveStorageState(gbAuthStateFile);
+          const cookiesFiltered = cookiesRaw.filter((o) => (o.domain === ".gamebanana.com") && (o.name === "sess" || o.name === "rmc"));
+          console.log(`Number of filtered cookies: ${cookiesFiltered.length}`);
+
+          homePage.writeAuthStateFile(gbAuthStateFile, cookiesFiltered);
         }
       );
     });
