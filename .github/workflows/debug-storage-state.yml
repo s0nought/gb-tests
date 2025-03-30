@@ -12,8 +12,40 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: ls --version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
 
-      - run: grep --version
+      - run: npm install
 
-      - run: stat --version
+      - run: npx playwright install --with-deps
+
+      - run: cp .env.sample .env
+
+      - run: npm run debug
+        env:
+          GB_USER_LOGIN: ${{ vars.GB_USER_LOGIN }}
+          GB_USER_PASSWORD: ${{ secrets.GB_USER_PASSWORD }}
+
+      - run: |
+          ls
+
+          if [[ -d "playwright" ]]; then
+            cd "playwright"
+            ls
+
+            if [[ -d "state" ]]; then
+              cd "state"
+              ls
+
+              if [[ -e "user.json" ]]; then
+                grep -F "name" user.json
+              else
+                echo "not found: user.json"
+              fi
+            else
+              echo "not found: state"
+            fi
+          else
+            echo "not found: playwright"
+          fi
