@@ -1,4 +1,4 @@
-import { test } from "@fixtures";
+import { test, expect } from "@fixtures";
 import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
@@ -38,6 +38,7 @@ test.describe("UI", () => {
           const searchQuery = "Outro 'Go get some sleep'";
 
           await homePage.goto();
+          await expect(page.locator("css=#PersonalNavModule")).toBeVisible();
           await homePage.interactHeader().fillSearchQueryInput(searchQuery);
           await homePage.interactHeader().clickSearchButton();
 
@@ -82,6 +83,7 @@ test.describe("UI", () => {
           const resultOrder = "Relevance";
 
           await searchPage.goto();
+          await expect(page.locator("css=#PersonalNavModule")).toBeVisible();
           await searchPage.fillSearchQueryInput(searchQuery);
           await searchPage.selectSection(section);
           await searchPage.selectGame(gameTitle);

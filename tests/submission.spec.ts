@@ -1,4 +1,4 @@
-import { test } from "@fixtures";
+import { test, expect } from "@fixtures";
 import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
@@ -33,7 +33,7 @@ test.describe("UI", () => {
         {
           tag: ["@cjm", "@debug"],
         },
-        async ({ submissionViewPage, submissionEditPage }) => {
+        async ({ page, submissionViewPage, submissionEditPage }) => {
           // test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
 
           const cookies = await page.context().cookies("https://gamebanana.com");
@@ -59,6 +59,7 @@ test.describe("UI", () => {
           const title = `Test Mod ${Date.now()}`;
 
           await submissionViewPage.goto(url);
+          await expect(page.locator("css=#PersonalNavModule")).toBeVisible();
           await submissionViewPage
             .interactSubNavigator()
             .getEntry("Edit")
