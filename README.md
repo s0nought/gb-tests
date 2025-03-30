@@ -5,6 +5,7 @@ End-to-end tests for [gamebanana.com](https://gamebanana.com)
 Table of Contents:
 
 - [Tests](#tests)
+- [Reports](#reports)
 - [Stack](#stack)
 - [Principles / Patterns](#principles--patterns)
 - [Installation](#installation)
@@ -21,6 +22,10 @@ Table of Contents:
     - _Download a file attached to the submission_
     - _Edit submission's title_
     - _Add a submission_
+
+## Reports
+
+[Latest Allure Report](https://s0nought.github.io/gb-tests/index.html)
 
 ## Stack
 
