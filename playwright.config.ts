@@ -19,7 +19,7 @@ const {
   GB_TEST_TIMEOUT_MS = "30000",
 } = process.env;
 
-const authFile: string = path.resolve(__dirname, "playwright", "state", "user.json")
+const authFile: string = path.resolve(__dirname, "playwright", "state", "user.json");
 
 export default defineConfig<IAuthState & IUserCredentials>({
   expect: {
@@ -63,7 +63,7 @@ export default defineConfig<IAuthState & IUserCredentials>({
       },
     ],
   ],
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   timeout: Number(GB_TEST_TIMEOUT_MS),
   use: {
     gbAuthStateFile: authFile,

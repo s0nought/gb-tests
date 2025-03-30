@@ -39,8 +39,6 @@ jobs:
           GB_USER_LOGIN: ${{ vars.GB_USER_LOGIN }}
           GB_USER_PASSWORD: ${{ secrets.GB_USER_PASSWORD }}
 
-      - run: ls -al /home/runner/work/gb-tests/gb-tests/playwright/state
-
       - name: Checkout gh-pages
         uses: actions/checkout@v4
         if: always()
