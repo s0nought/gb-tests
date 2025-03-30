@@ -1,4 +1,5 @@
 import { test } from "@fixtures";
+import { playwrightAuthStateFile } from "@constants";
 import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
@@ -33,8 +34,11 @@ test.describe("UI", () => {
         {
           tag: ["@cjm", "@debug"],
         },
-        async ({ submissionViewPage, submissionEditPage }) => {
-          // test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
+        async ({ page, submissionViewPage, submissionEditPage }) => {
+          test.use({ storageState: playwrightAuthStateFile });
+
+          const cookies = await page.context().cookies();
+          console.log(`Number of cookies: ${cookies.length}`);
 
           await allure.severity(allure.Severity.NORMAL);
 
