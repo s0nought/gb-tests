@@ -1,6 +1,7 @@
 import { type Page, type Cookie, test } from "@playwright/test";
 import { Button, CommonElement, Link } from "@elements";
-import { writeFileSync } from "node:fs";
+import { playwrightAuthStateDir, playwrightAuthStateFile } from "@constants";
+import { mkdirSync, writeFileSync } from "node:fs";
 
 import { Header } from "./components/header";
 
@@ -84,8 +85,9 @@ export class CustomPage {
   //   await this.page.context().storageState({ indexedDB: false, path });
   // }
 
-  public writeAuthStateFile(path: string, cookies: Cookie[]): void {
+  public writeAuthStateFile(cookies: Cookie[]): void {
     const data = {cookies: cookies, origins: []}
-    writeFileSync(path, JSON.stringify(data));
+    mkdirSync(playwrightAuthStateDir, { recursive: true });
+    writeFileSync(playwrightAuthStateFile, JSON.stringify(data), { encoding: "utf8", flag: "w" });
   }
 }

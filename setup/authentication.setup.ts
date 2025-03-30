@@ -21,7 +21,6 @@ test.describe("UI", () => {
           loginPage,
           gbUserLogin,
           gbUserPassword,
-          gbAuthStateFile,
         }) => {
           await allure.severity(allure.Severity.CRITICAL);
 
@@ -40,7 +39,7 @@ test.describe("UI", () => {
           const cookiesFiltered = cookiesRaw.filter((o) => (o.domain === ".gamebanana.com") && (o.name === "sess" || o.name === "rmc"));
           console.log(`Number of filtered cookies: ${cookiesFiltered.length}`);
 
-          homePage.writeAuthStateFile(gbAuthStateFile, cookiesFiltered);
+          homePage.writeAuthStateFile(cookiesFiltered);
         }
       );
     });

@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { defineConfig, devices } from "@playwright/test";
-import { type IAuthState, type IUserCredentials } from "@fixtures";
+import { type IUserCredentials } from "@fixtures";
 
 import {
   allureResultsDir,
@@ -19,7 +19,7 @@ const {
   GB_TEST_TIMEOUT_MS = "40000",
 } = process.env;
 
-export default defineConfig<IAuthState & IUserCredentials>({
+export default defineConfig<IUserCredentials>({
   expect: {
     timeout: Number(GB_EXPECT_TIMEOUT_MS),
   },
@@ -64,7 +64,6 @@ export default defineConfig<IAuthState & IUserCredentials>({
   retries: process.env.CI ? 2 : 0,
   timeout: Number(GB_TEST_TIMEOUT_MS),
   use: {
-    gbAuthStateFile: playwrightAuthStateFile,
     acceptDownloads: true,
     actionTimeout: Number(GB_ACTION_TIMEOUT_MS),
     baseURL: GB_BASE_URL,
