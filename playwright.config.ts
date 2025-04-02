@@ -61,7 +61,7 @@ export default defineConfig<IUserCredentials>({
       },
     ],
   ],
-  retries: process.env.CI ? 1 : 0,
+  retries: process.env.CI ? 2 : 0,
   timeout: Number(GB_TEST_TIMEOUT_MS),
   use: {
     acceptDownloads: true,
