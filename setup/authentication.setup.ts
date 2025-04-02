@@ -1,4 +1,5 @@
 import { test } from "@fixtures";
+import { playwrightAuthStateFile } from "@constants";
 import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
@@ -15,13 +16,7 @@ test.describe("UI", () => {
         {
           tag: ["@cjm"],
         },
-        async ({
-          page,
-          homePage,
-          loginPage,
-          gbUserLogin,
-          gbUserPassword,
-        }) => {
+        async ({ page, homePage, loginPage, gbUserLogin, gbUserPassword }) => {
           await allure.severity(allure.Severity.CRITICAL);
 
           await homePage.goto();
@@ -32,7 +27,10 @@ test.describe("UI", () => {
           await loginPage.clickSubmitButton();
 
           await homePage.assertWelcomeMessage(gbUserLogin);
-          await homePage.saveStorageState();
+          // await homePage.saveStorageState();
+          await page
+            .context()
+            .storageState({ indexedDB: false, path: playwrightAuthStateFile });
         }
       );
     });
