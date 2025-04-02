@@ -22,13 +22,8 @@ jobs:
 
       - run: cp .env.sample .env
 
-      - run: npm run debug
-        env:
-          GB_USER_LOGIN: ${{ vars.GB_USER_LOGIN }}
-          GB_USER_PASSWORD: ${{ secrets.GB_USER_PASSWORD }}
-
       - run: |
-          ls
+          npm run debug
 
           if [[ -d "playwright" ]]; then
             cd "playwright"
@@ -49,3 +44,6 @@ jobs:
           else
             echo "not found: playwright"
           fi
+        env:
+          GB_USER_LOGIN: ${{ vars.GB_USER_LOGIN }}
+          GB_USER_PASSWORD: ${{ secrets.GB_USER_PASSWORD }}
