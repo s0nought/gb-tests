@@ -1,7 +1,6 @@
-import { type Page, type Cookie, test } from "@playwright/test";
+import { type Page, test } from "@playwright/test";
 import { Button, CommonElement, Link } from "@elements";
-import { playwrightAuthStateDir, playwrightAuthStateFile } from "@constants";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { playwrightAuthStateFile } from "@constants";
 
 import { Header } from "./components/header";
 
@@ -81,13 +80,7 @@ export class CustomPage {
     }
   }
 
-  // public async saveStorageState(path: string): Promise<void> {
-  //   await this.page.context().storageState({ indexedDB: false, path });
-  // }
-
-  public writeAuthStateFile(cookies: Cookie[]): void {
-    const data = {cookies: cookies, origins: []}
-    mkdirSync(playwrightAuthStateDir, { recursive: true });
-    writeFileSync(playwrightAuthStateFile, JSON.stringify(data), { encoding: "utf8", flag: "w" });
+  public async saveStorageState(): Promise<void> {
+    await this.page.context().storageState({ indexedDB: false, path: playwrightAuthStateFile });
   }
 }

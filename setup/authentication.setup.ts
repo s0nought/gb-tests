@@ -32,14 +32,7 @@ test.describe("UI", () => {
           await loginPage.clickSubmitButton();
 
           await homePage.assertWelcomeMessage(gbUserLogin);
-
-          const cookiesRaw = await page.context().cookies();
-          console.log(`Number of raw cookies: ${cookiesRaw.length}`);
-
-          const cookiesFiltered = cookiesRaw.filter((o) => (o.domain === ".gamebanana.com") && (o.name === "sess" || o.name === "rmc"));
-          console.log(`Number of filtered cookies: ${cookiesFiltered.length}`);
-
-          homePage.writeAuthStateFile(cookiesFiltered);
+          await homePage.saveStorageState();
         }
       );
     });
