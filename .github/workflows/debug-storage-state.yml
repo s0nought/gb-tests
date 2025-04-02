@@ -27,25 +27,25 @@ jobs:
           GB_USER_LOGIN: ${{ vars.GB_USER_LOGIN }}
           GB_USER_PASSWORD: ${{ secrets.GB_USER_PASSWORD }}
 
-      # - run: |
-      #     ls
+      - run: |
+          ls
 
-      #     if [[ -d "playwright" ]]; then
-      #       cd "playwright"
-      #       ls
+          if [[ -d "playwright" ]]; then
+            cd "playwright"
+            ls
 
-      #       if [[ -d "state" ]]; then
-      #         cd "state"
-      #         ls
+            if [[ -d "state" ]]; then
+              cd "state"
+              ls
 
-      #         if [[ -e "user.json" ]]; then
-      #           grep -F "name" user.json
-      #         else
-      #           echo "not found: user.json"
-      #         fi
-      #       else
-      #         echo "not found: state"
-      #       fi
-      #     else
-      #       echo "not found: playwright"
-      #     fi
+              if [[ -e "user.json" ]]; then
+                grep -F "name" user.json
+              else
+                echo "not found: user.json"
+              fi
+            else
+              echo "not found: state"
+            fi
+          else
+            echo "not found: playwright"
+          fi

@@ -1,22 +1,21 @@
-import { test } from "@fixtures";
-import { playwrightAuthStateFile } from "@constants";
+import { test as setup } from "@fixtures";
 import * as allure from "allure-js-commons";
 
-test.describe("UI", () => {
-  test.describe("Core", () => {
-    test.describe("Authentication", () => {
-      test.beforeEach(async () => {
+setup.describe("UI", () => {
+  setup.describe("Core", () => {
+    setup.describe("Authentication", () => {
+      setup.beforeEach(async () => {
         await allure.epic("UI");
         await allure.feature("Core");
         await allure.story("Authentication");
       });
 
-      test(
+      setup(
         "Log in with username and password",
         {
           tag: ["@cjm"],
         },
-        async ({ page, homePage, loginPage, gbUserLogin, gbUserPassword }) => {
+        async ({ homePage, loginPage, gbUserLogin, gbUserPassword }) => {
           await allure.severity(allure.Severity.CRITICAL);
 
           await homePage.goto();
@@ -27,10 +26,7 @@ test.describe("UI", () => {
           await loginPage.clickSubmitButton();
 
           await homePage.assertWelcomeMessage(gbUserLogin);
-          // await homePage.saveStorageState();
-          await page
-            .context()
-            .storageState({ indexedDB: false, path: playwrightAuthStateFile });
+          await homePage.saveStorageState();
         }
       );
     });
