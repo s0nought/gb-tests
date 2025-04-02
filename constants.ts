@@ -16,7 +16,7 @@ const allureReportHistoryDir = path.resolve(
   allureHistoryDirName,
 );
 const playwrightResultsDir = path.resolve(__dirname, "test-results");
-const playwrightAuthStateDir = path.resolve(__dirname, "playwright", "state");
+const playwrightAuthStateDir = path.resolve(__dirname, "playwright", ".auth");
 const playwrightAuthStateFile = path.resolve(playwrightAuthStateDir, "user.json");
 const testsSetupDir = path.resolve(__dirname, "setup");
 const testsDir = path.resolve(__dirname, "tests");
