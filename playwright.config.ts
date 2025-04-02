@@ -38,7 +38,7 @@ export default defineConfig<IUserCredentials>({
       testDir: testsDir,
       use: {
         ...devices["Desktop Chrome"],
-        storageState: playwrightAuthStateFile,
+        storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
     },
