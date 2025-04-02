@@ -14,9 +14,9 @@ const {
   GB_USER_LOGIN = "UserLogin",
   GB_USER_PASSWORD = "UserPassword",
   GB_BASE_URL = "https://gamebanana.com",
-  GB_ACTION_TIMEOUT_MS = "10000",
-  GB_EXPECT_TIMEOUT_MS = "10000",
-  GB_TEST_TIMEOUT_MS = "30000",
+  GB_ACTION_TIMEOUT_MS = "20000",
+  GB_EXPECT_TIMEOUT_MS = "20000",
+  GB_TEST_TIMEOUT_MS = "40000",
 } = process.env;
 
 export default defineConfig<IUserCredentials>({
