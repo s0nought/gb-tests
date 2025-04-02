@@ -26,6 +26,15 @@ interface IPages {
   submissionViewPage: SubmissionViewPage;
 }
 
+const domainWhitelist = [
+  "gamebanana.com",
+  "webfiles.gamebanana.com",
+  "images.gamebanana.com",
+  "optimg.gamebanana.com",
+  "fonts.googleapis.com",
+  "ajax.googleapis.com",
+];
+
 const test = base.extend<IUserCredentials & IPages>({
   gbUserLogin: ["gbUserLogin", { option: true }],
   gbUserPassword: ["gbUserPassword", { option: true }],
@@ -60,6 +69,20 @@ const test = base.extend<IUserCredentials & IPages>({
 
   submissionViewPage: async ({ page }, use) => {
     await use(new SubmissionViewPage(page));
+  },
+
+  page: async ({ page }, use) => {
+    await page.route("**", async (route) => {
+      const url = new URL(route.request().url());
+      const domain = url.hostname;
+
+      if (domainWhitelist.includes(domain)) {
+        await route.continue();
+      } else {
+        await route.abort("blockedbyclient");
+      }
+    });
+    await use(page);
   },
 });
 
