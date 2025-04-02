@@ -15,12 +15,7 @@ test.describe("UI", () => {
         {
           tag: ["@cjm"],
         },
-        async ({
-          homePage,
-          loginPage,
-          gbUserLogin,
-          gbUserPassword,
-        }) => {
+        async ({ homePage, loginPage, gbUserLogin, gbUserPassword }) => {
           await allure.severity(allure.Severity.CRITICAL);
 
           await homePage.goto();
