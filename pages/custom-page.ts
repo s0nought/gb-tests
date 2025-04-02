@@ -1,5 +1,6 @@
 import { type Page, test } from "@playwright/test";
 import { Button, CommonElement, Link } from "@elements";
+import { playwrightAuthStateFile } from "@constants";
 
 import { Header } from "./components/header";
 
@@ -83,7 +84,7 @@ export class CustomPage {
     }
   }
 
-  public async saveStorageState(path: string): Promise<void> {
-    await this.page.context().storageState({ path });
+  public async saveStorageState(): Promise<void> {
+    await this.page.context().storageState({ indexedDB: false, path: playwrightAuthStateFile });
   }
 }

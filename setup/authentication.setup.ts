@@ -20,7 +20,6 @@ test.describe("UI", () => {
           loginPage,
           gbUserLogin,
           gbUserPassword,
-          gbAuthStateFile,
         }) => {
           await allure.severity(allure.Severity.CRITICAL);
 
@@ -33,7 +32,7 @@ test.describe("UI", () => {
 
           await homePage.assertWelcomeMessage(gbUserLogin);
           await homePage.waitForURL();
-          await homePage.saveStorageState(gbAuthStateFile);
+          await homePage.saveStorageState();
         }
       );
     });

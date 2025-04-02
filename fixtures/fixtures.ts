@@ -15,10 +15,6 @@ interface IUserCredentials {
   gbUserPassword: string;
 }
 
-interface IAuthState {
-  gbAuthStateFile: string;
-}
-
 interface IPages {
   addPage: AddPage;
   gamePage: GamePage;
@@ -30,10 +26,9 @@ interface IPages {
   submissionViewPage: SubmissionViewPage;
 }
 
-const test = base.extend<IUserCredentials & IAuthState & IPages>({
+const test = base.extend<IUserCredentials & IPages>({
   gbUserLogin: ["gbUserLogin", { option: true }],
   gbUserPassword: ["gbUserPassword", { option: true }],
-  gbAuthStateFile: ["gbAuthStateFile", { option: true }],
 
   addPage: async ({ page }, use) => {
     await use(new AddPage(page));
@@ -68,4 +63,4 @@ const test = base.extend<IUserCredentials & IAuthState & IPages>({
   },
 });
 
-export { expect, test, type IAuthState, type IUserCredentials };
+export { expect, test, type IUserCredentials };
