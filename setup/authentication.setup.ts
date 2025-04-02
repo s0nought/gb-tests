@@ -31,7 +31,6 @@ test.describe("UI", () => {
           await loginPage.clickSubmitButton();
 
           await homePage.assertWelcomeMessage(gbUserLogin);
-          await homePage.waitForURL();
           await homePage.saveStorageState();
         }
       );

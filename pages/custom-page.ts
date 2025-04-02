@@ -18,10 +18,6 @@ export class CustomPage {
     });
   }
 
-  public async waitForURL(url: string): Promise<void> {
-    await this.page.waitForURL(url);
-  }
-
   public getLatestMasterLogMessage(): CommonElement {
     return new CommonElement(
       "latest master log message",
