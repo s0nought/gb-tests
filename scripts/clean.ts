@@ -3,10 +3,9 @@ import { rmSync, mkdirSync } from "node:fs";
 import {
   allureResultsDir,
   playwrightResultsDir,
-  playwrightStateDir,
 } from "../constants"; // https://github.com/TypeStrong/ts-node/issues/138
 
-const dirs = [allureResultsDir, playwrightResultsDir, playwrightStateDir];
+const dirs = [allureResultsDir, playwrightResultsDir];
 
 console.log("Running clean.ts");
 
