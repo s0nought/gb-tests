@@ -1,5 +1,4 @@
 import { test } from "@fixtures";
-import { playwrightAuthStateFile } from "@constants";
 import * as allure from "allure-js-commons";
 
 test.describe("UI", () => {
@@ -16,15 +15,18 @@ test.describe("UI", () => {
         {
           tag: ["@cjm"],
         },
-        async ({ request, gbUserLogin, gbUserPassword }) => {
-          await request.post("https://gamebanana.com/apiv11/Member/Authenticate", {
-            data: {
-              "_sUsername": gbUserLogin,
-              "_sPassword": gbUserPassword,
-            },
-          });
+        async ({ homePage, loginPage, gbUserLogin, gbUserPassword }) => {
+          await allure.severity(allure.Severity.CRITICAL);
 
-          await request.storageState({ path: playwrightAuthStateFile });
+          await homePage.goto();
+          await homePage.interactHeader().clickLoginLink();
+
+          await loginPage.fillUsernameInput(gbUserLogin);
+          await loginPage.fillPasswordInput(gbUserPassword);
+          await loginPage.clickSubmitButton();
+
+          await homePage.assertWelcomeMessage(gbUserLogin);
+          await homePage.saveStorageState();
         }
       );
     });
