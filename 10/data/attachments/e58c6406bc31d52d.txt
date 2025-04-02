@@ -1,0 +1,226 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: UI >> Core >> Search >> Find a mod by its title and properties
+- Location: /home/runner/work/gb-tests/gb-tests/tests/search.spec.ts:36:11
+
+# Error details
+
+```
+TimeoutError: locator.click: Timeout 20000ms exceeded.
+Call log:
+  - waiting for locator('.select2-dropdown').locator('[role=\'listbox\']').locator('li[role=\'option\']:first-child')
+    - locator resolved to <li role="option" aria-disabled="true" data-select2-id="select2-data-9-ptaj" class="select2-results__option select2-results__option--disabled loading-results">Searching…</li>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+      - waiting 100ms
+    - waiting for element to be visible, enabled and stable
+    - element is not enabled
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+  - element was detached from the DOM, retrying
+
+    at /home/runner/work/gb-tests/gb-tests/elements/common.ts:33:26
+    at CommonElement.click (/home/runner/work/gb-tests/gb-tests/elements/common.ts:32:16)
+    at SearchPage.selectGame (/home/runner/work/gb-tests/gb-tests/pages/search-page.ts:98:23)
+    at /home/runner/work/gb-tests/gb-tests/tests/search.spec.ts:53:11
+```
+
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "Logo":
+    - img "Logo"
+  - link "Unleashed Recompiled icon":
+    - img "Unleashed Recompiled icon"
+  - link "Super Smash Bros. Crusade icon":
+    - img "Super Smash Bros. Crusade icon"
+  - link "Sonic 3 A.I.R. icon":
+    - img "Sonic 3 A.I.R. icon"
+  - link "Dr. Robotnik's Ring Racers icon":
+    - img "Dr. Robotnik's Ring Racers icon"
+  - link "Super Smash Bros. (Wii U) icon":
+    - img "Super Smash Bros. (Wii U) icon"
+  - textbox "Search..."
+  - button "Site Search"
+  - link "Log In"
+  - link "Sign Up"
+  - link "v2.0449"
+  - button "Site Menu"
+- heading "Search" [level=1]
+- navigation:
+  - link "Search"
+- text: Search Term
+- superscript: "*"
+- textbox "Search Term *": ZBOT NAV Editor Command Menu
+- text: Section
+- combobox "Section":
+  - option "Any"
+  - option "Apps"
+  - option "Articles"
+  - option "Bugs"
+  - option "Blogs"
+  - option "Clubs"
+  - option "Contests"
+  - option "Concepts"
+  - option "Events"
+  - option "Games"
+  - option "Ideas"
+  - option "Initiatives"
+  - option "Jams"
+  - option "Mods" [selected]
+  - option "Models"
+  - option "Members"
+  - option "News"
+  - option "Polls"
+  - option "Projects"
+  - option "Questions"
+  - option "Reviews"
+  - option "Requests"
+  - option "Scripts"
+  - option "Sounds"
+  - option "Sprays"
+  - option "Studios"
+  - option "Threads"
+  - option "Tools"
+  - option "Tutorials"
+  - option "Wikis"
+  - option "WiPs"
+- text: Game
+- combobox [expanded]:
+  - textbox
+  - listbox [expanded]:
+    - alert: The results could not be loaded.
+- button "Advanced Options"
+- button "Search"
+- text: No submissions found.
+- strong: Site
+- list:
+  - listitem:
+    - link "About"
+  - listitem:
+    - link "FAQ"
+  - listitem:
+    - link "Contact"
+- strong: Network
+- list:
+  - listitem:
+    - link "gbAPI"
+  - listitem:
+    - link "gbAPI - Old"
+  - listitem:
+    - link "BananaExchange"
+  - listitem:
+    - link "genr8rs"
+  - listitem:
+    - link "banana.org"
+- strong: Members
+- list:
+  - listitem:
+    - link "Login"
+  - listitem:
+    - link "Register"
+  - listitem:
+    - link "Online (1,852)"
+  - listitem:
+    - link "Index (3,405,707)"
+- strong: Legal
+- list:
+  - listitem:
+    - link "Site Rules"
+  - listitem:
+    - link "Terms of Service"
+  - listitem:
+    - link "Privacy Policy"
+  - listitem:
+    - link "DMCA Policy"
+  - listitem:
+    - link "Sexual Harassment"
+  - listitem:
+    - link "Age Restrictions"
+  - listitem:
+    - text: "For California Residents:"
+    - link "Do Not Sell My Personal Information"
+- list:
+  - listitem:
+    - link "Gamebanana Discord"
+  - listitem:
+    - link "Gamebanana Steam"
+  - listitem:
+    - link "Gamebanana Bluesky"
+  - listitem:
+    - link "Gamebanana Twitter"
+  - listitem:
+    - link "Gamebanana Youtube"
+  - listitem:
+    - link "Gamebanana Facebook"
+- list:
+  - listitem:
+    - link "Feedback"
+  - listitem:
+    - link "Bugs"
+- img
+- searchbox "Search": Counter-Strike 1.6
+```
+
+# Test source
+
+```ts
+   1 | import { type Locator, expect, test } from "@playwright/test";
+   2 |
+   3 | export class CommonElement {
+   4 |   constructor(
+   5 |     protected readonly description: string,
+   6 |     protected readonly locator: Locator
+   7 |   ) {
+   8 |     this.description = description;
+   9 |     this.locator = locator;
+  10 |   }
+  11 |
+  12 |   public async assertAttribute(name: string, value: string): Promise<void> {
+  13 |     await test.step(`Assert ${
+  14 |       this.description
+  15 |     } attribute "${name}" value is ${JSON.stringify(value)}`, async () => {
+  16 |       await expect(this.locator).toHaveAttribute(name, value);
+  17 |     });
+  18 |   }
+  19 |
+  20 |   public async assertTextContent(
+  21 |     text: string | RegExp | string[] | RegExp[]
+  22 |   ): Promise<void> {
+  23 |     // RegExp is serialized to "{}" with JSON.stringify()
+  24 |     await test.step(`Assert ${this.description} text content is ${String(
+  25 |       text
+  26 |     )}`, async () => {
+  27 |       await expect(this.locator).toHaveText(text);
+  28 |     });
+  29 |   }
+  30 |
+  31 |   public async click(): Promise<void> {
+  32 |     await test.step(`Click ${this.description}`, async () => {
+> 33 |       await this.locator.click();
+     |                          ^ TimeoutError: locator.click: Timeout 20000ms exceeded.
+  34 |     });
+  35 |   }
+  36 |
+  37 |   public async hover(): Promise<void> {
+  38 |     await test.step(`Hover ${this.description}`, async () => {
+  39 |       await this.locator.hover();
+  40 |     });
+  41 |   }
+  42 | }
+  43 |
+```
