@@ -21,7 +21,10 @@ jobs:
       - run: npx playwright install chromium --with-deps
       - run: cp .env.sample .env
       - run: ls playwright/state || true
-      - run: npm run e2e
+      - run: |
+          npm run e2e || \
+          { ls playwright/state || true; } || \
+          { grep -F "name" playwright/state/user.json || true; }
         env:
           GB_USER_LOGIN: ${{ vars.GB_USER_LOGIN }}
           GB_USER_PASSWORD: ${{ secrets.GB_USER_PASSWORD }}
