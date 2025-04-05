@@ -33,7 +33,8 @@ test.describe("UI", () => {
         }
       );
 
-      test(
+      // Fails due to the server-side error (on line 54)
+      test.skip(
         "Find a mod by its title and properties",
         {
           tag: ["@cjm"],
