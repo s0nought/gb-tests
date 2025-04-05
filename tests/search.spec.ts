@@ -33,13 +33,13 @@ test.describe("UI", () => {
         }
       );
 
-      // Fails due to the server-side error (on line 54)
-      test.skip(
+      test(
         "Find a mod by its title and properties",
         {
           tag: ["@cjm"],
         },
         async ({ searchPage, submissionViewPage }) => {
+          test.skip(true, "Fails due to the server-side error (on line 54)");
           await allure.severity(allure.Severity.NORMAL);
 
           const searchQuery = "ZBOT NAV Editor Command Menu";
