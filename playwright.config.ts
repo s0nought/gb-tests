@@ -31,6 +31,9 @@ export default defineConfig<IUserCredentials>({
       name: "setup",
       testDir: testsSetupDir,
       testMatch: /.*\.setup\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
     },
     {
       name: "chromium",
