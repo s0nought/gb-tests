@@ -23,7 +23,6 @@ jobs:
       - run: ls playwright/state || true
       - run: |
           npm run e2e || \
-          echo "=====" \
           { ls playwright/state || true; } && \
           { grep -F "name" playwright/state/user.json || true; }
         env:
