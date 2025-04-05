@@ -1,0 +1,213 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: UI >> Core >> Submission >> Add a submission
+- Location: /home/runner/work/gb-tests/gb-tests/tests/submission.spec.ts:57:11
+
+# Error details
+
+```
+TimeoutError: locator.click: Timeout 20000ms exceeded.
+Call log:
+  - waiting for locator('#SubNavigator').getByText('Add', { exact: true })
+    - locator resolved to <div>Add</div>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - performing click action
+    - click action done
+    - waiting for scheduled navigations to finish
+
+    at /home/runner/work/gb-tests/gb-tests/elements/common.ts:33:26
+    at CommonElement.click (/home/runner/work/gb-tests/gb-tests/elements/common.ts:32:16)
+    at /home/runner/work/gb-tests/gb-tests/tests/submission.spec.ts:86:65
+```
+
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "Logo":
+    - img "Logo"
+- navigation
+- heading "Add - Upload and share your mods or mod-related content." [level=1]
+- navigation:
+  - link "Add"
+- list:
+  - listitem:
+    - link "1. Select Game"
+  - listitem:
+    - link "2. Select Section"
+- paragraph:
+  - img
+  - strong: 7 Days To Die
+  - text: selected. Choose a section below...
+  - link "Change Game"
+- heading "Mod Sections" [level=5]
+- list:
+  - listitem:
+    - link "Mod 7DTD Installable files that modify or extend play"
+  - listitem:
+    - link "Script 7DTD Config code, macros & commands"
+  - listitem:
+    - link "Sound 7DTD Sound effects & voices"
+  - listitem:
+    - link "Spray 7DTD Digital graffiti"
+  - listitem:
+    - link "Tool 7DTD Modding & game-related applications"
+- heading "Dev Sections" [level=5]
+- list:
+  - listitem:
+    - link "Contest 7DTD Design competitions"
+  - listitem:
+    - link "Concept 7DTD Sketches & drawings"
+  - listitem:
+    - link "Project 7DTD Folders to organize development work"
+  - listitem:
+    - link "Request 7DTD Appeals for things to be made"
+  - listitem:
+    - link "Tutorial 7DTD Guides to modding & gaming"
+  - listitem:
+    - link "WiP 7DTD Works in Progress"
+- heading "Social Sections" [level=5]
+- list:
+  - listitem:
+    - link "Article 7DTD Special format content"
+  - listitem:
+    - link "Blog 7DTD Anything you want to write about"
+  - listitem:
+    - link "Event 7DTD Organized occasions"
+  - listitem:
+    - link "News 7DTD Industry & site news"
+  - listitem:
+    - link "Poll 7DTD Questions to pose to the community"
+  - listitem:
+    - link "Question 7DTD Technical questions"
+  - listitem:
+    - link "Thread 7DTD Forum discussions"
+  - listitem:
+    - link "Ware 7DTD Products & services for sale"
+- heading "Misc Sections" [level=5]
+- list:
+  - listitem:
+    - link "App Mini programs that enhance the site"
+  - listitem:
+    - link "Site Bug A site display or functionality issue"
+  - listitem:
+    - link "Club Social groups with common interests"
+  - listitem:
+    - link "Game Standalone games"
+  - listitem:
+    - link "Site Idea Suggestions to improve GameBanana"
+  - listitem:
+    - link "Model 3D meshes"
+  - listitem:
+    - link "Review Game, mod & hardware reviews"
+  - listitem:
+    - link "Studio Modding teams"
+  - listitem:
+    - link "Status Update A brief announcement to buddies"
+  - listitem:
+    - link "Wiki Information pages"
+- heading "Categories" [level=5]
+- list:
+  - listitem:
+    - link "Article Category"
+  - listitem:
+    - link "Blog Category"
+  - listitem:
+    - link "Concept Category"
+  - listitem:
+    - link "Contest Category"
+  - listitem:
+    - link "Event Category"
+  - listitem:
+    - link "Forum"
+  - listitem:
+    - link "Generator Category"
+  - listitem:
+    - link "Mod Category"
+  - listitem:
+    - link "Model Category"
+  - listitem:
+    - link "News Category"
+  - listitem:
+    - link "Poll Category"
+  - listitem:
+    - link "Question Category"
+  - listitem:
+    - link "Request Category"
+  - listitem:
+    - link "Script Category"
+  - listitem:
+    - link "Sound Category"
+  - listitem:
+    - link "Spray Category"
+  - listitem:
+    - link "Tool Category"
+  - listitem:
+    - link "Tutorial Category"
+  - listitem:
+    - link "Wiki Category"
+  - listitem:
+    - link "Ware Category"
+  - listitem:
+    - link "WiP Category"
+- img
+```
+
+# Test source
+
+```ts
+   1 | import { type Locator, expect, test } from "@playwright/test";
+   2 |
+   3 | export class CommonElement {
+   4 |   constructor(
+   5 |     protected readonly description: string,
+   6 |     protected readonly locator: Locator
+   7 |   ) {
+   8 |     this.description = description;
+   9 |     this.locator = locator;
+  10 |   }
+  11 |
+  12 |   public async assertAttribute(name: string, value: string): Promise<void> {
+  13 |     await test.step(`Assert ${
+  14 |       this.description
+  15 |     } attribute "${name}" value is ${JSON.stringify(value)}`, async () => {
+  16 |       await expect(this.locator).toHaveAttribute(name, value);
+  17 |     });
+  18 |   }
+  19 |
+  20 |   public async assertTextContent(
+  21 |     text: string | RegExp | string[] | RegExp[]
+  22 |   ): Promise<void> {
+  23 |     // RegExp is serialized to "{}" with JSON.stringify()
+  24 |     await test.step(`Assert ${this.description} text content is ${String(
+  25 |       text
+  26 |     )}`, async () => {
+  27 |       await expect(this.locator).toHaveText(text);
+  28 |     });
+  29 |   }
+  30 |
+  31 |   public async click(): Promise<void> {
+  32 |     await test.step(`Click ${this.description}`, async () => {
+> 33 |       await this.locator.click();
+     |                          ^ TimeoutError: locator.click: Timeout 20000ms exceeded.
+  34 |     });
+  35 |   }
+  36 |
+  37 |   public async hover(): Promise<void> {
+  38 |     await test.step(`Hover ${this.description}`, async () => {
+  39 |       await this.locator.hover();
+  40 |     });
+  41 |   }
+  42 | }
+  43 |
+```

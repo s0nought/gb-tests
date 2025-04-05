@@ -1,0 +1,302 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: UI >> Core >> Submission >> Edit submission's title
+- Location: /home/runner/work/gb-tests/gb-tests/tests/submission.spec.ts:29:11
+
+# Error details
+
+```
+Error: Timed out 20000ms waiting for expect(locator).toHaveText(expected)
+
+Locator: locator('#PageTitle')
+Expected pattern: /.*Test Mod 1743870555489.*/
+Received string:  "
+															Test Mod 1743854366795·······························
+																																		- A Mod for 7 Days To Die.·················
+																													"
+Call log:
+  - expect.toHaveText with timeout 20000ms
+  - waiting for locator('#PageTitle')
+    24 × locator resolved to <h1 id="PageTitle">…</h1>
+       - unexpected value "
+															Test Mod 1743854366795																															
+																																		- A Mod for 7 Days To Die.
+																
+																													"
+
+    at /home/runner/work/gb-tests/gb-tests/elements/common.ts:27:34
+    at CommonElement.assertTextContent (/home/runner/work/gb-tests/gb-tests/elements/common.ts:24:16)
+    at SubmissionViewPage.assertSubmissionTitle (/home/runner/work/gb-tests/gb-tests/pages/submission-view-page.ts:32:32)
+    at /home/runner/work/gb-tests/gb-tests/tests/submission.spec.ts:51:36
+```
+
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "Logo":
+    - img "Logo"
+  - link "Friday Night Funkin' icon":
+    - img "Friday Night Funkin' icon"
+  - link "Rhythm Tengoku icon":
+    - img "Rhythm Tengoku icon"
+  - link "Half-Life icon":
+    - img "Half-Life icon"
+  - link "Baldi's Basics icon":
+    - img "Baldi's Basics icon"
+  - link "Wuthering Waves icon":
+    - img "Wuthering Waves icon"
+  - textbox "Search..."
+  - button "Site Search"
+  - link "v2.0449"
+  - text: 65Þ (+1Þ)
+  - button "Site Menu"
+- navigation:
+  - img "Personal"
+  - link "Activity"
+  - link "NavOptions"
+- heading "Test Mod 1743854366795 - A Mod for 7 Days To Die." [level=1]
+- navigation:
+  - link "7 Days To Die":
+    - img
+    - text: 7 Days To Die
+  - link "Mods"
+  - link "Other/Misc"
+  - link "Test Mod 1743854366795"
+- list:
+  - listitem:
+    - link "Overview"
+  - listitem:
+    - link "Updates"
+  - listitem:
+    - link "Issues"
+  - listitem: Admin
+  - listitem:
+    - link "Todos"
+  - listitem:
+    - link "License"
+  - listitem:
+    - link "0 Likes"
+  - listitem:
+    - link "0 Subscribers"
+  - listitem:
+    - link "0 Collections"
+  - listitem:
+    - link "Edit"
+  - listitem:
+    - link "Embed"
+  - listitem:
+    - link "Thankers"
+  - listitem:
+    - link "Report"
+- link:
+  - img
+- link "Test Mod 1743854366795":
+  - img "Test Mod 1743854366795"
+- button "Add Update"
+- paragraph: A test mod for end-to-end tests
+- article: Hey! This is a test mod for end-to-end tests. Please contact me prior to trashing or withholding this mod. Thank you!
+- button "Manage Collections"
+- heading "Files" [level=2]
+- list:
+  - listitem:
+    - code: yet-another-test-mod.json
+    - time: 3mo
+    - text: ClamAV Clean AvastAV Clean
+    - link "Download"
+    - link "File Info"
+- heading "Comments" [level=2]
+- group:
+  - text: "Order:"
+  - combobox "Order:":
+    - option "Popular" [selected]
+    - option "Newest"
+- text: No comments yet!
+- heading "Embed" [level=2]:
+  - link "Embed"
+- img "Share banner"
+- term: "Image URL:"
+- definition:
+  - textbox "Image URL": https://gamebanana.com/mods/embeddables/567136?type=large
+  - button "content_copy"
+- term: "HTML embed code:"
+- definition:
+  - textbox "HTML embed code": <a href="https://gamebanana.com/mods/567136"><img src="https://gamebanana.com/mods/embeddables/567136?type=large"/></a>
+  - button "content_copy"
+- term: "BB embed code:"
+- definition:
+  - textbox "BB embed code": "[url=\"https://gamebanana.com/mods/567136\"][img]https://gamebanana.com/mods/embeddables/567136?type=large[/img][/url]"
+  - button "content_copy"
+- term: "Markdown embed code:"
+- definition:
+  - textbox "Markdown embed code": "[![](\"https://gamebanana.com/mods/embeddables/567136?type=large\")](https://gamebanana.com/mods/567136)"
+  - button "content_copy"
+- heading "Credits" [level=2]
+- term: Key Authors
+- definition:
+  - term:
+    - link "s0nought_test"
+    - link "Contributions"
+- heading "Submitter" [level=2]
+- link "s0nought_test avatar":
+  - img "s0nought_test avatar"
+- link "s0nought_test"
+- text: Creator
+- list
+- heading "Game" [level=2]
+- link "7 Days To Die icon 7 Days To Die":
+  - img "7 Days To Die icon"
+  - text: 7 Days To Die
+- button "Subscribe 21"
+- heading "Category" [level=2]
+- link "Other/Misc"
+- heading "Details" [level=2]
+- term: "Version:"
+- definition: Unknown
+- heading "License" [level=2]:
+  - link "License"
+- article:
+  - link "Creative Commons License":
+    - img "Creative Commons License"
+  - text: This work is licensed under a
+  - link "Creative Commons Attribution-NonCommercial-NoDerivs 4.0 Unported License"
+  - text: .
+- heading "Share" [level=2]
+- list:
+  - listitem:
+    - link "Share on Reddit"
+  - listitem:
+    - link "Share on Twitter"
+  - listitem:
+    - link "Share on Facebook"
+  - listitem:
+    - link "Share on Tumblr"
+- list:
+  - listitem: "57"
+  - listitem: "231"
+  - listitem:
+    - time: 3mo
+  - listitem:
+    - time: 5s
+- strong: Site
+- list:
+  - listitem:
+    - link "About"
+  - listitem:
+    - link "FAQ"
+  - listitem:
+    - link "Contact"
+- strong: Network
+- list:
+  - listitem:
+    - link "gbAPI"
+  - listitem:
+    - link "gbAPI - Old"
+  - listitem:
+    - link "BananaExchange"
+  - listitem:
+    - link "genr8rs"
+  - listitem:
+    - link "banana.org"
+- strong: Members
+- list:
+  - listitem:
+    - link "Login"
+  - listitem:
+    - link "Register"
+  - listitem:
+    - link "Online (2,659)"
+  - listitem:
+    - link "Index (3,413,168)"
+- strong: Legal
+- list:
+  - listitem:
+    - link "Site Rules"
+  - listitem:
+    - link "Terms of Service"
+  - listitem:
+    - link "Privacy Policy"
+  - listitem:
+    - link "DMCA Policy"
+  - listitem:
+    - link "Sexual Harassment"
+  - listitem:
+    - link "Age Restrictions"
+  - listitem:
+    - text: "For California Residents:"
+    - link "Do Not Sell My Personal Information"
+- list:
+  - listitem:
+    - link "Gamebanana Discord"
+  - listitem:
+    - link "Gamebanana Steam"
+  - listitem:
+    - link "Gamebanana Bluesky"
+  - listitem:
+    - link "Gamebanana Twitter"
+  - listitem:
+    - link "Gamebanana Youtube"
+  - listitem:
+    - link "Gamebanana Facebook"
+- list:
+  - listitem:
+    - link "Feedback"
+  - listitem:
+    - link "Bugs"
+- img
+```
+
+# Test source
+
+```ts
+   1 | import { type Locator, expect, test } from "@playwright/test";
+   2 |
+   3 | export class CommonElement {
+   4 |   constructor(
+   5 |     protected readonly description: string,
+   6 |     protected readonly locator: Locator
+   7 |   ) {
+   8 |     this.description = description;
+   9 |     this.locator = locator;
+  10 |   }
+  11 |
+  12 |   public async assertAttribute(name: string, value: string): Promise<void> {
+  13 |     await test.step(`Assert ${
+  14 |       this.description
+  15 |     } attribute "${name}" value is ${JSON.stringify(value)}`, async () => {
+  16 |       await expect(this.locator).toHaveAttribute(name, value);
+  17 |     });
+  18 |   }
+  19 |
+  20 |   public async assertTextContent(
+  21 |     text: string | RegExp | string[] | RegExp[]
+  22 |   ): Promise<void> {
+  23 |     // RegExp is serialized to "{}" with JSON.stringify()
+  24 |     await test.step(`Assert ${this.description} text content is ${String(
+  25 |       text
+  26 |     )}`, async () => {
+> 27 |       await expect(this.locator).toHaveText(text);
+     |                                  ^ Error: Timed out 20000ms waiting for expect(locator).toHaveText(expected)
+  28 |     });
+  29 |   }
+  30 |
+  31 |   public async click(): Promise<void> {
+  32 |     await test.step(`Click ${this.description}`, async () => {
+  33 |       await this.locator.click();
+  34 |     });
+  35 |   }
+  36 |
+  37 |   public async hover(): Promise<void> {
+  38 |     await test.step(`Hover ${this.description}`, async () => {
+  39 |       await this.locator.hover();
+  40 |     });
+  41 |   }
+  42 | }
+  43 |
+```
