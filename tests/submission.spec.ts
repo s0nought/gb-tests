@@ -16,8 +16,6 @@ test.describe("UI", () => {
           tag: ["@cjm"],
         },
         async ({ submissionViewPage }) => {
-          test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
-
           await allure.severity(allure.Severity.CRITICAL);
 
           const url = "/mods/567136";
@@ -34,8 +32,6 @@ test.describe("UI", () => {
           tag: ["@cjm"],
         },
         async ({ submissionViewPage, submissionEditPage }) => {
-          // test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
-
           await allure.severity(allure.Severity.NORMAL);
 
           const url = "/mods/567136";
@@ -70,8 +66,6 @@ test.describe("UI", () => {
           submissionViewPage,
           gbUserLogin,
         }) => {
-          test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
-
           await allure.severity(allure.Severity.CRITICAL);
 
           const url = "/games/5538"; // 7 Days To Die
