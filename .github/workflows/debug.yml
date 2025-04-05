@@ -23,7 +23,7 @@ jobs:
       - run: ls playwright/state || true
       - run: |
           npm run e2e || \
-          { ls playwright/state || true; } || \
+          { ls playwright/state || true; } && \
           { grep -F "name" playwright/state/user.json || true; }
         env:
           GB_USER_LOGIN: ${{ vars.GB_USER_LOGIN }}
