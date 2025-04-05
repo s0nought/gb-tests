@@ -7,6 +7,9 @@ on:
     paths:
       - "**.ts"
       - "**.json"
+  pull_request:
+    branches:
+      - "master"
 
 jobs:
   autotests:
@@ -16,37 +19,23 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "22.14.0"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install browsers
-        run: npx playwright install --with-deps
-
-      - name: Copy .env
-        run: cp .env.sample .env
-
-      - name: Run autotests
-        run: npm run e2e
+      - run: npm install
+      - run: npx playwright install chromium --with-deps
+      - run: cp .env.sample .env
+      - run: npm run e2e
         env:
           GB_USER_LOGIN: ${{ vars.GB_USER_LOGIN }}
           GB_USER_PASSWORD: ${{ secrets.GB_USER_PASSWORD }}
-
-      - name: Checkout gh-pages
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
-
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -57,7 +46,6 @@ jobs:
           allure_report: allure-report
           allure_history: allure-history
           keep_reports: 20
-
       - name: Publish Allure report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
