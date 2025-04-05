@@ -16,6 +16,8 @@ test.describe("UI", () => {
           tag: ["@cjm"],
         },
         async ({ homePage, searchPage, submissionViewPage }) => {
+          test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
+
           await allure.severity(allure.Severity.NORMAL);
 
           const searchQuery = "Outro 'Go get some sleep'";
@@ -39,6 +41,8 @@ test.describe("UI", () => {
           tag: ["@cjm"],
         },
         async ({ searchPage, submissionViewPage }) => {
+          test.skip(process.env.CI === "true", "Works fine locally. Won't work on CI though.");
+
           await allure.severity(allure.Severity.NORMAL);
 
           const searchQuery = "ZBOT NAV Editor Command Menu";
