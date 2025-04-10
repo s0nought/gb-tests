@@ -32,6 +32,7 @@ export default defineConfig<IUserCredentials>({
       testDir: testsSetupDir,
       testMatch: /.*\.setup\.ts/,
       use: {
+        // storage state won't work without this when in github workflows
         ...devices["Desktop Chrome"],
       },
     },
