@@ -39,7 +39,6 @@ test.describe("UI", () => {
           tag: ["@cjm"],
         },
         async ({ searchPage, submissionViewPage }) => {
-          test.skip(true, "Fails due to the server-side error (on line 54)");
           await allure.severity(allure.Severity.NORMAL);
 
           const searchQuery = "ZBOT NAV Editor Command Menu";
